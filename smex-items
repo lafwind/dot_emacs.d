@@ -1,0 +1,23 @@
+
+;; ----- smex-history -----
+(
+ load-theme
+ shell
+ package-install
+ dired
+ package-menu-mode
+ cd
+ 5x5
+)
+
+;; ----- smex-data -----
+(
+ (package-menu-mode . 2)
+ (package-install . 4)
+ (dired . 1)
+ (coffee-watch . 2)
+ (coffee-mode-menu . 1)
+ (coffee-compile-buffer . 1)
+ (load-theme . 2)
+ (shell . 1)
+)

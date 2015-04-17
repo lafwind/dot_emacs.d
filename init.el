@@ -26,6 +26,7 @@
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 
 (load-theme 'subatomic t)
+
 ;; (load-theme 'ample t)
 ;;(enable-theme 'ample)
 ;;(load-theme 'monokai t)
@@ -44,7 +45,7 @@
 (column-number-mode t)     ;在模式行上显示行号列号
 
 ;; 初始宽高
-(add-to-list 'default-frame-alist '(height . 25))
+(add-to-list 'default-frame-alist '(height . 36))
 (add-to-list 'default-frame-alist '(width . 80))
 
 ;;显示行号
@@ -61,9 +62,9 @@
 (setq auto-save-default nil)  ;不生成#file_name#临时文件
 
 
-;;font
-;;(set-default-font "Monaco-11")
-;;(set-default-font "Source Code Pro-10.9")
+;; font
+;; (set-default-font "Monaco-11")
+;; (set-default-font "Source Code Pro-10.9")
 (set-default-font "Anonymous Pro-10.9")
 
 (add-hook 'after-init-hook 'global-company-mode)
@@ -74,15 +75,50 @@
 (require 'multiple-cursors)
 (multiple-cursors-mode t)
 
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
 (require 'ido)
 (ido-mode t)
 
+;; smex
+(require 'smex) ; Not needed if you use package.el
+(smex-initialize) ; Can be omitted. This might cause a (minimal) delay
+					; when Smex is auto-initialized on its first run.
 
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+;; This is your old M-x.
+(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+
+
+;;; Ruby
 ;;; Robe
 
 (add-hook 'ruby-mode-hook 'robe-mode)
 (eval-after-load 'company
   '(push 'company-robe company-backends))
+
+;; indent guide
+(require 'indent-guide)
+(indent-guide-global-mode)
+(setq indent-guide-recursive t)
+
+;;; Coffee Script
+
+;; automatically clean up bad whitespace
+(setq whitespace-action '(auto-cleanup))
+;; only show bad whitespace
+(setq whitespace-style '(trailing space-before-tab indentation empty space-after-tab))
+;; This gives you a tab of 2 spaces
+(custom-set-variables
+ '(coffee-tab-width 2))
+
+;; expand-region
+(require 'expand-region)
+    (global-set-key (kbd "C-=") 'er/expand-region)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -110,7 +146,7 @@
  '(magit-diff-use-overlays nil)
  '(package-selected-packages
    (quote
-    (solarized-theme base16-theme twilight-theme twilight-anti-bright-theme flatland-theme subatomic-theme ample-theme color-theme-sanityinc-tomorrow sublime-themes evil-nerd-commenter smartparens robe rinari multiple-cursors markdown-mode magit js2-mode company-inf-ruby)))
+    (coffee-mode smex expand-region indent-guide highlight-indentation aggressive-indent solarized-theme base16-theme twilight-theme twilight-anti-bright-theme flatland-theme subatomic-theme ample-theme color-theme-sanityinc-tomorrow sublime-themes evil-nerd-commenter smartparens robe rinari multiple-cursors markdown-mode magit js2-mode company-inf-ruby)))
  '(sp-highlight-pair-overlay nil)
  '(sp-highlight-wrap-overlay nil)
  '(sp-highlight-wrap-tag-overlay nil)
