@@ -1,13 +1,13 @@
 
 ;; ----- smex-history -----
 (
+ customize-group
+ customize-variable
+ customize-themes
  load-theme
  shell
  package-install
  dired
- package-menu-mode
- cd
- 5x5
 )
 
 ;; ----- smex-data -----
@@ -20,4 +20,7 @@
  (coffee-compile-buffer . 1)
  (load-theme . 2)
  (shell . 1)
+ (customize-themes . 1)
+ (customize-variable . 3)
+ (customize-group . 3)
 )

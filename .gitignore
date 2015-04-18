@@ -1,3 +1,5 @@
+# /custom.el
+
 .depend
 pyim/
 .wg-file.el
@@ -5,7 +7,6 @@ pyim/
 /.emacs.desktop
 /auto-save-list
 /.session
-/custom.el
 *.elc
 CVS
 .svn
