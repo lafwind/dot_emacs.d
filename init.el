@@ -21,6 +21,8 @@
 (menu-bar-mode 0)
 (scroll-bar-mode 0)
 
+;; 删除空行和行尾空格
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;; 主题
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
