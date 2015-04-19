@@ -1,19 +1,19 @@
 
 ;; ----- smex-history -----
 (
+ load-file
+ package-install
  customize-group
  customize-variable
  customize-themes
  load-theme
  shell
- package-install
- dired
 )
 
 ;; ----- smex-data -----
 (
  (package-menu-mode . 2)
- (package-install . 4)
+ (package-install . 6)
  (dired . 1)
  (coffee-watch . 2)
  (coffee-mode-menu . 1)
@@ -23,4 +23,5 @@
  (customize-themes . 1)
  (customize-variable . 3)
  (customize-group . 3)
+ (load-file . 3)
 )

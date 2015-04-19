@@ -2,28 +2,31 @@
 
 ;; Add the original Emacs Lisp Package Archive
 (add-to-list 'package-archives
-             '("elpa" . "http://tromey.com/elpa/"))
+	     '("elpa" . "http://tromey.com/elpa/"))
 
 ;; Add the user-contributed repository
 (add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/"))
+	     '("marmalade" . "http://marmalade-repo.org/packages/"))
 
 ;; melpa
 (add-to-list 'package-archives
-              '("melpa" . "http://melpa.org/packages/") t)
+	      '("melpa" . "http://melpa.org/packages/") t)
 (when (< emacs-major-version 24)
    ;; For important compatibility libraries like cl-lib
-   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
-(package-initialize) ;; You might already have this line
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 
+(package-initialize) ;; You might already have this line
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; hide bar
 (tool-bar-mode 0)
 (menu-bar-mode 0)
 (scroll-bar-mode 0)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; 删除空行和行尾空格
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; 主题
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 
@@ -50,13 +53,13 @@
 (add-to-list 'default-frame-alist '(height . 36))
 (add-to-list 'default-frame-alist '(width . 80))
 
-;;显示行号
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; 显示行号
 (global-linum-mode t)
 
 (fset 'yes-or-no-p 'y-or-n-p)      ;Treat 'y' as yes, 'n' as no.
 
 (setq default-directory "~/projects/")  ;寻找文件的默认路径
-
 
 (setq inhibit-splash-screen t)
 ;;(setq inhibit-startup-message t)
@@ -71,7 +74,19 @@
 
 (add-hook 'after-init-hook 'global-company-mode)
 
-;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; fill-column-indictor
+(require 'fill-column-indicator)
+(setq fci-rule-width 3)
+(setq fci-rule-color "#2a2c3e")
+
+
+(define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
+(global-fci-mode 1)
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; multiple-cursors
 
 (require 'multiple-cursors)
@@ -82,10 +97,13 @@
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; ido
 (require 'ido)
 (ido-mode t)
 
-;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; smex
 (require 'smex) ; Not needed if you use package.el
 (smex-initialize) ; Can be omitted. This might cause a (minimal) delay
@@ -97,7 +115,7 @@
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
 
-;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; smartparens
 ;; global
 (require 'smartparens-config)
@@ -106,7 +124,7 @@
 ;; highlights matching pairs
 (show-smartparens-global-mode t)
 
-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Ruby
 ;;; Robe
 
@@ -114,11 +132,18 @@
 (eval-after-load 'company
   '(push 'company-robe company-backends))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; sql-indent
+(eval-after-load "sql"
+  '(load-library "sql-indent"))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; indent guide
 (require 'indent-guide)
 (indent-guide-global-mode)
 (setq indent-guide-recursive t)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Coffee Script
 
 ;; automatically clean up bad whitespace
@@ -129,10 +154,12 @@
 (custom-set-variables
  '(coffee-tab-width 2))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; expand-region
 (require 'expand-region)
-    (global-set-key (kbd "C-=") 'er/expand-region)
+(global-set-key (kbd "C-=") 'er/expand-region)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; customise
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
