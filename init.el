@@ -144,9 +144,9 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; indent guide
-(require 'indent-guide)
-(indent-guide-global-mode)
-(setq indent-guide-recursive t)
+;; (require 'indent-guide)
+;; (indent-guide-global-mode)
+;; (setq indent-guide-recursive t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Coffee Script

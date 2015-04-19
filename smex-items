@@ -1,10 +1,10 @@
 
 ;; ----- smex-history -----
 (
+ load-file
  run-geiser
  run-lisp
  package-install
- load-file
  customize-group
  customize-variable
  customize-themes
@@ -23,7 +23,7 @@
  (customize-themes . 1)
  (customize-variable . 3)
  (customize-group . 3)
- (load-file . 3)
+ (load-file . 4)
  (run-lisp . 1)
  (run-geiser . 5)
 )
