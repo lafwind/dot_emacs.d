@@ -1,19 +1,19 @@
 
 ;; ----- smex-history -----
 (
- load-file
+ run-geiser
+ run-lisp
  package-install
+ load-file
  customize-group
  customize-variable
  customize-themes
- load-theme
- shell
 )
 
 ;; ----- smex-data -----
 (
  (package-menu-mode . 2)
- (package-install . 6)
+ (package-install . 8)
  (dired . 1)
  (coffee-watch . 2)
  (coffee-mode-menu . 1)
@@ -24,4 +24,6 @@
  (customize-variable . 3)
  (customize-group . 3)
  (load-file . 3)
+ (run-lisp . 1)
+ (run-geiser . 5)
 )
