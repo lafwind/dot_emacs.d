@@ -82,7 +82,11 @@
 ;; (set-default-font "Source Code Pro-10.9")
 (set-default-font "Anonymous Pro-10.9")
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; company
 (add-hook 'after-init-hook 'global-company-mode)
+(setq company-idle-delay 0)
+(setq company-minimum-prefix-length 2)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; fill-column-indictor
