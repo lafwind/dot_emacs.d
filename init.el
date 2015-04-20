@@ -1,3 +1,4 @@
+
 (require 'package)
 
 ;; Add the original Emacs Lisp Package Archive
@@ -50,8 +51,8 @@
 (column-number-mode t)     ;在模式行上显示行号列号
 
 ;; 初始宽高
-(add-to-list 'default-frame-alist '(height . 36))
-(add-to-list 'default-frame-alist '(width . 80))
+;; (add-to-list 'default-frame-alist '(height . 36))
+(add-to-list 'default-frame-alist '(width . 95))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; 显示行号
@@ -66,6 +67,15 @@
 (setq make-backup-files nil)
 (setq auto-save-default nil)  ;不生成#file_name#临时文件
 
+;; (global-visual-line-mode 1)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; fringe mode
+(fringe-mode 1)
+;; (defun hide-fringes ()
+;;   (set-window-fringes (selected-window) 1))
+;;
+;; (add-hook 'neotree-mode-hook 'hide-fringes)
 
 ;; font
 ;; (set-default-font "Monaco-11")
@@ -79,7 +89,7 @@
 (require 'fill-column-indicator)
 (setq fci-rule-width 3)
 (setq fci-rule-color "#2a2c3e")
-
+(setq fci-rule-column 80)
 
 (define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
 (global-fci-mode 1)
@@ -97,11 +107,29 @@
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; neotree
+(require 'neotree)
+(global-set-key [f8] 'neotree-toggle)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ido
 (require 'ido)
 (ido-mode t)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; flx-ido
+(require 'flx-ido)
+(ido-mode 1)
+(ido-everywhere 1)
+(flx-ido-mode 1)
+;; disable ido faces to see flx highlights.
+(setq ido-enable-flex-matching t)
+;; (setq ido-use-faces nil)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; projectile
+;; (projectile-global-mode t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; smex
@@ -131,6 +159,10 @@
 (add-hook 'ruby-mode-hook 'robe-mode)
 (eval-after-load 'company
   '(push 'company-robe company-backends))
+
+;;;
+(require 'rinari)
+(global-rinari-mode t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; scheme

@@ -1,29 +1,43 @@
 
 ;; ----- smex-history -----
 (
- load-file
- run-geiser
- run-lisp
- package-install
- customize-group
- customize-variable
- customize-themes
+ customize
+ select-frame
+ neotree-mode
+ neotree
+ fringe-mode
+ flymake-mode
+ set-fringe-style
 )
 
 ;; ----- smex-data -----
 (
  (package-menu-mode . 2)
- (package-install . 8)
+ (package-install . 23)
  (dired . 1)
  (coffee-watch . 2)
  (coffee-mode-menu . 1)
  (coffee-compile-buffer . 1)
  (load-theme . 2)
- (shell . 1)
+ (shell . 3)
  (customize-themes . 1)
  (customize-variable . 3)
- (customize-group . 3)
- (load-file . 4)
+ (customize-group . 8)
+ (load-file . 6)
  (run-lisp . 1)
- (run-geiser . 5)
+ (run-geiser . 7)
+ (electric-pair-mode . 2)
+ (package-autoremove . 1)
+ (neotree-show . 1)
+ (neotree . 2)
+ (package-refresh-contents . 1)
+ (project-explorer-open . 2)
+ (toggle-truncate-lines . 3)
+ (fringe-mode . 11)
+ (set-fringe-style . 1)
+ (flymake-mode . 4)
+ (flymake-goto-next-error . 1)
+ (neotree-mode . 1)
+ (select-frame . 1)
+ (customize . 1)
 )
