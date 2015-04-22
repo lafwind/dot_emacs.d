@@ -1,19 +1,19 @@
 
 ;; ----- smex-history -----
 (
+ package-install
  customize
  select-frame
  neotree-mode
  neotree
  fringe-mode
  flymake-mode
- set-fringe-style
 )
 
 ;; ----- smex-data -----
 (
  (package-menu-mode . 2)
- (package-install . 23)
+ (package-install . 29)
  (dired . 1)
  (coffee-watch . 2)
  (coffee-mode-menu . 1)

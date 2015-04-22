@@ -1,13 +1,14 @@
 
 (require 'package)
 
-;; Add the original Emacs Lisp Package Archive
+;;; Add the original Emacs Lisp Package Archive
 (add-to-list 'package-archives
 	     '("elpa" . "http://tromey.com/elpa/"))
 
 ;; Add the user-contributed repository
 (add-to-list 'package-archives
 	     '("marmalade" . "http://marmalade-repo.org/packages/"))
+
 
 ;; melpa
 (add-to-list 'package-archives
@@ -71,7 +72,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; fringe mode
-(fringe-mode 1)
+(fringe-mode '(8 . 1))
 ;; (defun hide-fringes ()
 ;;   (set-window-fringes (selected-window) 1))
 ;;
@@ -86,7 +87,13 @@
 ;;; company
 (add-hook 'after-init-hook 'global-company-mode)
 (setq company-idle-delay 0)
-(setq company-minimum-prefix-length 2)
+;;(setq company-minimum-prefix-length 2)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; flycheck
+
+(add-hook 'after-init-hook #'global-flycheck-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; fill-column-indictor
@@ -133,7 +140,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; projectile
-;; (projectile-global-mode t)
+(projectile-global-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; smex
