@@ -1,25 +1,25 @@
 
 ;; ----- smex-history -----
 (
+ shell
  package-install
+ projectile-mode
  customize
  select-frame
  neotree-mode
  neotree
- fringe-mode
- flymake-mode
 )
 
 ;; ----- smex-data -----
 (
  (package-menu-mode . 2)
- (package-install . 29)
+ (package-install . 30)
  (dired . 1)
  (coffee-watch . 2)
  (coffee-mode-menu . 1)
  (coffee-compile-buffer . 1)
  (load-theme . 2)
- (shell . 3)
+ (shell . 4)
  (customize-themes . 1)
  (customize-variable . 3)
  (customize-group . 8)
@@ -40,4 +40,5 @@
  (neotree-mode . 1)
  (select-frame . 1)
  (customize . 1)
+ (projectile-mode . 1)
 )
