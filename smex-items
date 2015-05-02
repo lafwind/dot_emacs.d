@@ -1,19 +1,19 @@
 
 ;; ----- smex-history -----
 (
- shell
  package-install
+ package-refresh-contents
+ package-autoremove
+ shell
  projectile-mode
  customize
  select-frame
- neotree-mode
- neotree
 )
 
 ;; ----- smex-data -----
 (
  (package-menu-mode . 2)
- (package-install . 30)
+ (package-install . 34)
  (dired . 1)
  (coffee-watch . 2)
  (coffee-mode-menu . 1)
@@ -27,10 +27,10 @@
  (run-lisp . 1)
  (run-geiser . 7)
  (electric-pair-mode . 2)
- (package-autoremove . 1)
+ (package-autoremove . 2)
  (neotree-show . 1)
  (neotree . 2)
- (package-refresh-contents . 1)
+ (package-refresh-contents . 2)
  (project-explorer-open . 2)
  (toggle-truncate-lines . 3)
  (fringe-mode . 11)

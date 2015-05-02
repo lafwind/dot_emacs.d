@@ -1,6 +1,7 @@
-
+;; init.el --- for initialing the emacs
 (require 'package)
 
+;;; code:
 ;;; Add the original Emacs Lisp Package Archive
 (add-to-list 'package-archives
 	     '("elpa" . "http://tromey.com/elpa/"))
@@ -81,7 +82,7 @@
 ;; font
 ;; (set-default-font "Monaco-11")
 ;; (set-default-font "Source Code Pro-10.9")
-(set-default-font "Anonymous Pro-10.9")
+(set-frame-font "Anonymous Pro-10.9")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; company
@@ -211,3 +212,5 @@
 ;; customise
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
+
+;;; init.el ends here
