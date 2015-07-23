@@ -26,6 +26,7 @@
 (menu-bar-mode 0)
 (scroll-bar-mode 0)
 
+(setq max-mini-window-height 1.00)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; 删除空行和行尾空格
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
