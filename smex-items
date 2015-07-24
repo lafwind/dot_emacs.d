@@ -1,20 +1,20 @@
 
 ;; ----- smex-history -----
 (
- delete-other-windows
- delete-other-frames
- display-buffer
+ evil-mode
+ emacs-lisp-mode
+ magit-commit-amend
+ magit-status
+ web-mode
  package-install
- switch-to-next-buffer
- switch-to-buffer
- maximize-window
+ load-theme
 )
 
 ;; ----- smex-data -----
 (
  (package-menu-mode . 2)
- (package-install . 78)
- (dired . 1)
+ (package-install . 85)
+ (dired . 5)
  (coffee-watch . 2)
  (coffee-mode-menu . 1)
  (coffee-compile-buffer . 1)
@@ -32,7 +32,7 @@
  (neotree . 2)
  (package-refresh-contents . 9)
  (project-explorer-open . 2)
- (toggle-truncate-lines . 3)
+ (toggle-truncate-lines . 4)
  (fringe-mode . 11)
  (set-fringe-style . 1)
  (flymake-mode . 4)
@@ -43,7 +43,7 @@
  (projectile-mode . 1)
  (helm-find-files . 1)
  (set-fill-column . 1)
- (web-mode . 7)
+ (web-mode . 12)
  (web-mode-enable . 1)
  (color-theme-sanityinc-tomorrow-night . 1)
  (powerline-reset . 4)
@@ -51,9 +51,9 @@
  (powerline-revert . 1)
  (powerline-evil-vim-theme . 3)
  (powerline-nano-theme . 3)
- (eshell . 4)
+ (eshell . 5)
  (helm-buffers-list . 4)
- (imenu . 2)
+ (imenu . 4)
  (helm-documentation . 1)
  (helm-locate . 2)
  (helm-configuration . 1)
@@ -77,14 +77,14 @@
  (buffer-menu . 3)
  (my-theme . 1)
  (powerline-default-theme . 1)
- (magit-status . 1)
- (magit-mode . 1)
- (emacs-lisp-mode . 1)
+ (magit-status . 3)
+ (magit-mode . 3)
+ (emacs-lisp-mode . 2)
  (magit-describe-item . 1)
  (version . 1)
  (magit-branch-manager . 3)
- (helm-recentf . 1)
- (inf-ruby . 4)
+ (helm-recentf . 3)
+ (inf-ruby . 5)
  (evil-window-set-height . 1)
  (ansi-term . 4)
  (package-initialize . 1)
@@ -92,15 +92,43 @@
  (ido-find-file . 1)
  (buffer-menu-open . 1)
  (ibuffer-do-occur . 1)
- (ido-dired . 1)
- (ido-display-file . 1)
- (ido-display-buffer . 2)
+ (ido-dired . 2)
+ (ido-display-file . 2)
+ (ido-display-buffer . 3)
  (kill-buffer . 1)
  (ido-switch-buffer . 1)
  (maximize-window . 4)
  (switch-to-buffer . 1)
  (switch-to-next-buffer . 1)
  (display-buffer . 1)
- (delete-other-frames . 2)
- (delete-other-windows . 1)
+ (delete-other-frames . 3)
+ (delete-other-windows . 2)
+ (recentf-open-files . 3)
+ (recentf-mode . 1)
+ (recentf-open-more-files . 1)
+ (ruby-switch-to-inf . 1)
+ (highlight-parentheses-mode . 1)
+ (show-paren-mode . 2)
+ (customize-face . 3)
+ (emmet-mode . 3)
+ (html-mode . 3)
+ (css-mode . 2)
+ (ido-make-directory . 3)
+ (make-directory . 1)
+ (ido-mode . 2)
+ (list-directory . 2)
+ (dired-display-file . 5)
+ (dired-summary . 1)
+ (dired-do-isearch . 1)
+ (dired-tree-up . 1)
+ (dired-do-redisplay . 1)
+ (dired-do-search . 1)
+ (dired-view-file . 1)
+ (ibuffer-mark-dired-buffers . 1)
+ (ido-enter-dired . 1)
+ (ido-list-directory . 1)
+ (web-mode-debug . 1)
+ (magit-commit-amend . 1)
+ (magit-commit-mode . 5)
+ (evil-mode . 2)
 )

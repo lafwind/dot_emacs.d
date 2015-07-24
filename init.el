@@ -27,6 +27,10 @@
 (scroll-bar-mode 0)
 
 (setq max-mini-window-height 1.00)
+
+;;; don't auto break line
+(set-default 'truncate-lines t)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; 删除空行和行尾空格
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
@@ -125,9 +129,11 @@
 ;;; UI
 (require 'color)
 
+;(bg (face-attribute 'default :background))
 (let ((bg (face-attribute 'default :background)))
   (custom-set-faces
    `(company-tooltip ((t (:inherit default :background ,(color-lighten-name bg 2)))))
+   ; `(company-tooltip ((t (:inherit default :background "black"))))
    `(company-scrollbar-bg ((t (:background ,(color-lighten-name bg 10)))))
    `(company-scrollbar-fg ((t (:background ,(color-lighten-name bg 5)))))
    `(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
@@ -192,6 +198,7 @@
 
 (evil-leader/set-key
   "f" 'helm-find
+  "hr" 'helm-recentf
   "m" 'helm-imenu
   "hf" 'helm-find-files
   "hb" 'helm-buffers-list
@@ -289,11 +296,20 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; smartparens
 ;; global
-;;; (require 'smartparens-config)
-;;; (smartparens-global-mode t)
+; (require 'smartparens-config)
+; ; (smartparens-global-mode t)
 
 ;; highlights matching pairs
-;; (show-smartparens-global-mode t)
+; (show-smartparens-global-mode t)
+
+; (set-face-attribute 'sp-pair-overlay-face nil :background "black")
+
+
+(show-paren-mode t)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; highlight-parentheses
+; (require 'highlight-parentheses)
 
 ;;; evil mode
 (require 'evil)
@@ -323,6 +339,7 @@
 ;;; For all
 (evil-leader/set-key
   "zsh" 'ansi-term
+
   ;;; For window
   "wk" 'windmove-up
   "wj" 'windmove-down
@@ -330,14 +347,19 @@
   "wh" 'windmove-left
   "vs" 'split-window-right
   "hs" 'split-window-below
+  "wf" 'delete-other-windows
   "wm" 'maximize-window
-  "ws" 'maximize-window
+
   ;; Start with M-
   ",x" 'smex
+  ",md" 'make-directory
 
   ;; Start with C-
   "xc" 'save-buffers-kill-emacs
   "xk" 'kill-buffer
+
+  ;; Mode
+  ",,w" 'web-mode
 )
 
 ;;; ido
@@ -348,6 +370,10 @@
 )
 
 ;;; Magit
+
+; (evil-set-initial-state 'magit-commit-mode 'motion)
+(setq evil-leader/no-prefix-mode-rx '("magit-.*-mode" "gnus-.*-mode"))
+
 (evil-leader/set-key
   "gs" 'magit-status
   "gl" 'magit-log
@@ -403,6 +429,7 @@
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.haml?\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.css?\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.scss?\\'" . web-mode))
 
@@ -418,6 +445,17 @@
 (setq web-mode-css-indent-offset 2)
 (setq web-mode-code-indent-offset 2)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Emmet
+(require 'emmet-mode)
+(add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
+(add-hook 'web-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
+;; (add-hook 'html-mode-hook  'emmet-mode)
+;; (add-hook 'haml-mode-hook  'emmet-mode)
+;; (add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
+;; (add-hook 'scss-mode-hook  'emmet-mode)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; load & configure js2-mode
 (autoload 'js2-mode "js2-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
@@ -459,6 +497,9 @@
 ;; expand-region
 (require 'expand-region)
 (global-set-key (kbd "C-=") 'er/expand-region)
+(evil-leader/set-key
+  "er" 'er/expand-region
+)
 
 
 
