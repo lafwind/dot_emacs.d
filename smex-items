@@ -1,13 +1,13 @@
 
 ;; ----- smex-history -----
 (
+ getenv
+ view-echo-area-messages
+ shell
+ shell-command
+ execute-extended-command
+ eshell
  magit-commit
- magit-commit-mode
- evil-mode
- emacs-lisp-mode
- magit-commit-amend
- magit-status
- web-mode
 )
 
 ;; ----- smex-data -----
@@ -19,7 +19,7 @@
  (coffee-mode-menu . 1)
  (coffee-compile-buffer . 1)
  (load-theme . 35)
- (shell . 4)
+ (shell . 9)
  (customize-themes . 1)
  (customize-variable . 3)
  (customize-group . 8)
@@ -51,7 +51,7 @@
  (powerline-revert . 1)
  (powerline-evil-vim-theme . 3)
  (powerline-nano-theme . 3)
- (eshell . 5)
+ (eshell . 7)
  (helm-buffers-list . 4)
  (imenu . 4)
  (helm-documentation . 1)
@@ -132,4 +132,8 @@
  (magit-commit-mode . 6)
  (evil-mode . 2)
  (magit-commit . 2)
+ (execute-extended-command . 2)
+ (shell-command . 1)
+ (getenv . 6)
+ (view-echo-area-messages . 1)
 )

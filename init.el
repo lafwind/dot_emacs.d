@@ -331,6 +331,26 @@
 (global-set-key [escape] 'keyboard-escape-quit)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; For shell
+(add-hook 'term-mode-hook (lambda()
+                (yas-minor-mode -1)))
+
+(setq shell-command-switch "-ic")
+
+;; Setting PATH
+;; (setenv "PATH"
+;;   (concat
+;;    "/to/some/path" ":"
+;;    (getenv "PATH")
+;;   )
+;; )
+
+(evil-leader/set-key
+  "zsh" 'ansi-term
+  "sh" 'shell-command
+)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; evil-leader
 (require 'evil-leader)
 (global-evil-leader-mode)
@@ -338,7 +358,6 @@
 
 ;;; For all
 (evil-leader/set-key
-  "zsh" 'ansi-term
 
   ;;; For window
   "wk" 'windmove-up
@@ -347,7 +366,7 @@
   "wh" 'windmove-left
   "vs" 'split-window-right
   "hs" 'split-window-below
-  "wf" 'delete-other-windows
+  "ww" 'delete-other-windows
   "wm" 'maximize-window
 
   ;; Start with M-
