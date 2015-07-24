@@ -1,13 +1,13 @@
 
 ;; ----- smex-history -----
 (
+ magit-commit
+ magit-commit-mode
  evil-mode
  emacs-lisp-mode
  magit-commit-amend
  magit-status
  web-mode
- package-install
- load-theme
 )
 
 ;; ----- smex-data -----
@@ -129,6 +129,7 @@
  (ido-list-directory . 1)
  (web-mode-debug . 1)
  (magit-commit-amend . 1)
- (magit-commit-mode . 5)
+ (magit-commit-mode . 6)
  (evil-mode . 2)
+ (magit-commit . 2)
 )

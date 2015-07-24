@@ -371,7 +371,7 @@
 
 ;;; Magit
 
-; (evil-set-initial-state 'magit-commit-mode 'motion)
+(evil-set-initial-state 'magit-commit-mode 'motion)
 (setq evil-leader/no-prefix-mode-rx '("magit-.*-mode" "gnus-.*-mode"))
 
 (evil-leader/set-key
