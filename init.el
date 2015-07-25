@@ -59,11 +59,20 @@
 ;; (load-theme 'molokai t)
 ;; (setq molokai-theme-kit t)
 
+(custom-set-faces
+ '(col-highlight ((t (:background "#3F4A5A"))))
+ '(hl-line ((t (:background "#3F4A5A"))))
+ '(lazy-highlight ((t (:background "#eecccc" :foreground "#666666")))))
+
 ;;指针颜色
 (set-cursor-color "white")
 
 ;;鼠标颜色
 (set-mouse-color "white")
+
+(set-face-attribute 'vertical-border
+                    nil
+                    :foreground "#3A3F4A")
 
 ;; 显示行列号
 ;; (setq column-number-mode t)
@@ -175,9 +184,35 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; neotree
-;;; (require 'neotree)
-;;; (global-set-key [f8] 'neotree-toggle)
+(require 'neotree)
+(global-set-key [f8] 'neotree-toggle)
+(setq neo-theme 'ascii) ; 'classic, 'nerd, 'ascii, 'arrow
+(setq neo-window-width 36)
+(setq neo-smart-open t)
 
+(setq projectile-switch-project-action 'neotree-projectile-action)
+
+(add-hook 'neotree-mode-hook
+          (lambda ()
+            (define-key evil-normal-state-local-map (kbd "o") 'neotree-enter)
+            (define-key evil-normal-state-local-map (kbd "r") 'neotree-rename-node)
+            (define-key evil-normal-state-local-map (kbd "d") 'neotree-delete-node)
+            (define-key evil-normal-state-local-map (kbd "a") 'neotree-create-node)
+            (define-key evil-normal-state-local-map (kbd "u") 'neotree-refresh)
+            (define-key evil-normal-state-local-map (kbd "c") 'neotree-change-root)
+            (define-key evil-normal-state-local-map (kbd "p") 'neotree-select-up-node)
+            (define-key evil-normal-state-local-map (kbd "s") 'neotree-select-next-sibling-node)
+            (define-key evil-normal-state-local-map (kbd "S") 'neotree-select-previous-sibling-node)
+            (define-key evil-normal-state-local-map (kbd "th") 'neotree-hidden-file-toggle)
+            (define-key evil-normal-state-local-map (kbd "q") 'neotree-hide)
+            (define-key evil-normal-state-local-map (kbd "RET") 'neotree-enter)))
+
+;;; neotree UI
+
+(custom-set-faces
+ '(neo-dir-link-face ((t (:foreground "#9999EE"))))
+ '(neo-file-link-face ((t (:foreground "#A8B1B8")))))
+(custom-set-variables)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; helm
@@ -232,6 +267,12 @@
 
 ;; Show projectile lists by most recently active
 (setq projectile-sort-order (quote recently-active))
+
+(evil-leader/set-key
+  "pp" 'projectile-switch-project
+  "pf" 'projectile-find-file
+)
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

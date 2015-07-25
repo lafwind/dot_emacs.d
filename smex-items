@@ -1,13 +1,13 @@
 
 ;; ----- smex-history -----
 (
+ minor-mode-menu-from-indicator
+ customize-group
+ customize-face
+ web-mode
  getenv
  view-echo-area-messages
  shell
- shell-command
- execute-extended-command
- eshell
- magit-commit
 )
 
 ;; ----- smex-data -----
@@ -22,7 +22,7 @@
  (shell . 9)
  (customize-themes . 1)
  (customize-variable . 3)
- (customize-group . 8)
+ (customize-group . 10)
  (load-file . 6)
  (run-lisp . 2)
  (run-geiser . 9)
@@ -43,7 +43,7 @@
  (projectile-mode . 1)
  (helm-find-files . 1)
  (set-fill-column . 1)
- (web-mode . 12)
+ (web-mode . 13)
  (web-mode-enable . 1)
  (color-theme-sanityinc-tomorrow-night . 1)
  (powerline-reset . 4)
@@ -109,7 +109,7 @@
  (ruby-switch-to-inf . 1)
  (highlight-parentheses-mode . 1)
  (show-paren-mode . 2)
- (customize-face . 3)
+ (customize-face . 4)
  (emmet-mode . 3)
  (html-mode . 3)
  (css-mode . 2)
@@ -136,4 +136,5 @@
  (shell-command . 1)
  (getenv . 6)
  (view-echo-area-messages . 1)
+ (minor-mode-menu-from-indicator . 1)
 )
