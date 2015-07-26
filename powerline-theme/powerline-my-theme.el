@@ -100,10 +100,11 @@
                                      (funcall separator-right seg2 seg1)
                                      (powerline-raw " " seg1)
                                      (powerline-raw "%6p" seg1 'r)
-                                     (when powerline-display-hud
-                                       (powerline-hud seg1 seg3))
-                                      )))
-                     (concat (powerline-render lhs)
+				     (when powerline-display-hud
+				       (powerline-hud seg1 seg3))
+				     (powerline-raw " " seg1)
+				     )))
+		     (concat (powerline-render lhs)
                              (powerline-fill seg3 (powerline-width rhs))
                              (powerline-render rhs)
                       ))))))

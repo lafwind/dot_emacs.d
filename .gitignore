@@ -50,3 +50,5 @@ recentf
 places
 ido.last
 projectile.cache
+rake.cache
+smex-items

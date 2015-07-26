@@ -64,7 +64,7 @@
 (custom-set-faces
  '(col-highlight ((t (:background "#3F4A5A"))))
  '(hl-line ((t (:background "#4A4F5A"))))
- '(lazy-highlight ((t (:background "#aa8888" :foreground "#666666")))))
+ '(lazy-highlight ((t (:background "#aa8888" :foreground "#ffffff")))))
 
 ;;指针颜色
 (set-cursor-color "white")
@@ -77,10 +77,10 @@
                     :foreground "#3A3F4A")
 
 ;; 显示行列号
-;; (setq column-number-mode t)
-; (setq line-number-mode t)
-; (column-number-mode t)     ;在模式行上显示行号列号
-; (setq linum-format "  %d ")
+(setq column-number-mode t)
+(setq line-number-mode t)
+(column-number-mode t)     ;在模式行上显示行号列号
+(setq linum-format "  %d ")
 ;; (setq linum-format "%5d \u2502 ")
 ;; (custom-set-faces '(linum ((t (:foreground "pink" :background "#363a4a" :box nil)))) )
 
@@ -103,8 +103,14 @@
 
 (setq default-directory "~/projects/")  ;寻找文件的默认路径
 
-(setq inhibit-splash-screen t)
+; (setq inhibit-splash-screen t)
+; (setq inhibit-startup-screen t)
 ;;(setq inhibit-startup-message t)
+; (setq inhibit-startup-message t)
+
+(setq inhibit-startup-message t)
+(setq initial-scratch-message "")
+
 (setq make-backup-files nil)
 (setq auto-save-default nil)  ;不生成#file_name#临时文件
 
@@ -128,7 +134,7 @@
 ;;; company
 (add-hook 'after-init-hook 'global-company-mode)
 (setq company-idle-delay 0)
-;;(setq company-minimum-prefix-length 2)
+(setq company-minimum-prefix-length 2)
 
 (eval-after-load 'company
   '(progn
@@ -136,8 +142,8 @@
      (define-key company-active-map [S-tab] 'company-select-previous)
      (define-key company-active-map [tab] 'company-select-next)))
 (setq company-selection-wrap-around t)
-
-;;; UI
+;
+; ;;; UI
 (require 'color)
 
 ;(bg (face-attribute 'default :background))
@@ -190,9 +196,25 @@
 (global-set-key [f8] 'neotree-toggle)
 (setq neo-theme 'ascii) ; 'classic, 'nerd, 'ascii, 'arrow
 (setq neo-window-width 36)
-(setq neo-smart-open t)
+; (setq neo-smart-open t)
 
 (setq projectile-switch-project-action 'neotree-projectile-action)
+
+(defun neotree-project-dir ()
+    "Open NeoTree using the git root."
+    (interactive)
+    (let ((project-dir (ffip-project-root))
+          (file-name (buffer-file-name)))
+      (if project-dir
+          (progn
+            (neotree-dir project-dir)
+            (neotree-find file-name))
+        (neotree-find))))
+        ; (message "Could not find git project root."))))
+
+(evil-leader/set-key
+  "nn" 'neotree-project-dir
+  )
 
 (add-hook 'neotree-mode-hook
           (lambda ()
@@ -273,9 +295,16 @@
 (evil-leader/set-key
   "pp" 'projectile-switch-project
   "pf" 'projectile-find-file
+  "pr" 'projectile-recentf
 )
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; recentf
+(require 'recentf)
+(recentf-mode 1)
+
+(setq recentf-max-menu-items 100)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ido
@@ -326,6 +355,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; ivy mode
 
+(require 'ivy)
 (ivy-mode 1)
 (setq ivy-use-virtual-buffers t)
 (global-set-key "\C-s" 'swiper)
@@ -355,12 +385,15 @@
 )
 
 ;;; find-file-in-project
+
+(require 'find-file-in-project)
 (autoload 'ivy-read "ivy")
-;(setq projectile-completion-system 'ivy)
+; (setq projectile-completion-system 'ivy)
 
 (evil-leader/set-key
   "fp" 'find-file-in-project
 )
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -508,20 +541,64 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Ruby
 
+(add-hook 'ruby-mode-hook 'projectile-on)
+
 ;;; Robe
 (require 'robe)
 
 (add-hook 'ruby-mode-hook 'robe-mode)
+
 (global-company-mode t)
-(eval-after-load 'company
-  '(push 'company-robe company-backends))
+(push 'company-robe company-backends)
 
 ;;;
 (require 'rinari)
-(global-rinari-mode t)
+; (global-rinari-mode t)
+
+;;; projectile-rails
+(add-hook 'projectile-mode-hook 'projectile-rails-on)
 
 (evil-leader/set-key
-  "rb" 'inf-ruby
+  "rirb" 'inf-ruby
+
+  "rg" 'projectile-rails-generate
+  "rr" 'rinari-rake
+  "rR" 'projectile-rails-rake
+  "rs" 'rinari-web-server
+  "rS" 'rinari-web-server-restart
+  "r!s" 'projectile-rails-sever
+  "rc" 'rinari-console
+  "rC" 'projectile-rails-console
+  "re" 'rinari-test
+  "rq" 'rinari-sql
+
+
+  "rm" 'rinari-find-model
+  "rM" 'projectile-rails-find-model
+  "rc" 'rinari-find-controller
+  "rC" 'projectile-rails-find-controller
+  "rv" 'rinari-find-view
+  "rV" 'projectile-rails-find-view
+  "rn" 'rinari-find-migration
+  "rN" 'projectile-rails-find-migration
+  "rh" 'rinari-find-helper
+  "rH" 'projectile-rails-find-helper
+  "rt" 'rinari-find-test
+  "rT" 'projectile-rails-find-test
+  "rj" 'rinari-find-javascript
+  "ry" 'rinari-find-stylesheet
+
+  "rff" 'rinari-find-file-in-project
+  "rfn" 'rinari-find-configuration
+  "rfg" 'projectile-rails-goto-gemfile
+  "rfr" 'projectile-rails-goto-routes
+  "rfl" 'rinari-find-log
+  "rfL" 'projectile-rails-find-log
+  "rfe" 'rinari-find-environment
+  "rfs" 'projectile-rails-goto-schema
+  "rfx" 'rinari-find-fixture
+  "rfX" 'projectile-rails-find-fixture
+
 )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
