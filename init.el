@@ -59,10 +59,12 @@
 ;; (load-theme 'molokai t)
 ;; (setq molokai-theme-kit t)
 
+(global-hl-line-mode 1)
+;; (column-number-mode 1)
 (custom-set-faces
  '(col-highlight ((t (:background "#3F4A5A"))))
- '(hl-line ((t (:background "#3F4A5A"))))
- '(lazy-highlight ((t (:background "#eecccc" :foreground "#666666")))))
+ '(hl-line ((t (:background "#4A4F5A"))))
+ '(lazy-highlight ((t (:background "#aa8888" :foreground "#666666")))))
 
 ;;指针颜色
 (set-cursor-color "white")
@@ -76,9 +78,9 @@
 
 ;; 显示行列号
 ;; (setq column-number-mode t)
-(setq line-number-mode t)
-(column-number-mode t)     ;在模式行上显示行号列号
-(setq linum-format "  %d ")
+; (setq line-number-mode t)
+; (column-number-mode t)     ;在模式行上显示行号列号
+; (setq linum-format "  %d ")
 ;; (setq linum-format "%5d \u2502 ")
 ;; (custom-set-faces '(linum ((t (:foreground "pink" :background "#363a4a" :box nil)))) )
 
@@ -232,7 +234,7 @@
 (setq helm-ff-file-name-history-use-recentf t)
 
 (evil-leader/set-key
-  "f" 'helm-find
+  "hf" 'helm-find
   "hr" 'helm-recentf
   "m" 'helm-imenu
   "hf" 'helm-find-files
@@ -292,6 +294,7 @@
 ; (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
 ; (define-key ido-completion-map (kbd "C-p") 'ido-prev-match)
 ;(define-key helm-map (kbd "C-z") 'helm-select-action)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; flx-ido
  (require 'flx-ido)
@@ -299,8 +302,8 @@
 (ido-everywhere 1)
 (flx-ido-mode 1)
 ;;; disable ido faces to see flx highlights.
-;(setq ido-enable-flex-matching t)
-; (setq ido-use-faces nil)
+(setq ido-enable-flex-matching t)
+ (setq ido-use-faces nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; ido-vertical-mode
@@ -317,10 +320,48 @@
 (set-face-attribute 'ido-vertical-only-match-face nil
                     :background nil
                     :foreground nil)
-(set-face-attribute 'ido-vertical-match-face nil
+ (set-face-attribute 'ido-vertical-match-face nil
                     :foreground nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ivy mode
+
+(ivy-mode 1)
+(setq ivy-use-virtual-buffers t)
+(global-set-key "\C-s" 'swiper)
+(global-set-key "\C-r" 'swiper)
+(global-set-key (kbd "C-c C-r") 'ivy-resume)
+(global-set-key [f6] 'ivy-resume)
+
+(defun ivy-couns-git ()
+  "Find file in the current Git repository."
+  (interactive)
+  (let* ((default-directory (locate-dominating-file
+                             default-directory ".git"))
+         (cands (split-string
+                 (shell-command-to-string
+                  "git ls-files --full-name --")
+                 "\n"))
+         (file (ivy-read "Find file: " cands)))
+    (when file
+      (find-file file))))
+(global-set-key (kbd "C-c f") 'couns-git)
+
+(evil-leader/set-key
+  "ib" 'ivy-switch-buffer
+  "/" 'swiper
+  "ir" 'ivy-recentf
+  "if" 'ivy-couns-git
+)
+
+;;; find-file-in-project
+(autoload 'ivy-read "ivy")
+;(setq projectile-completion-system 'ivy)
+
+(evil-leader/set-key
+  "fp" 'find-file-in-project
+)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; smex
@@ -410,6 +451,8 @@
   "ww" 'delete-other-windows
   "wm" 'maximize-window
 
+  "xo" 'pop-global-mark
+
   ;; Start with M-
   ",x" 'smex
   ",md" 'make-directory
@@ -464,6 +507,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Ruby
+
 ;;; Robe
 (require 'robe)
 
@@ -475,6 +519,10 @@
 ;;;
 (require 'rinari)
 (global-rinari-mode t)
+
+(evil-leader/set-key
+  "rb" 'inf-ruby
+)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; web-mode
@@ -492,18 +540,24 @@
 (add-to-list 'auto-mode-alist '("\\.haml?\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.css?\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.scss?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.jsx?\\'" . web-mode))
 
 (defun my-web-mode-hook ()
   "Hooks for Web mode."
+  (setq-default indent-tabs-mode nil)
+  (setq web-mode-attr-indent-offset 2)
   (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-code-indent-offset 2)
+
+  ;; padding
+  (setq web-mode-style-padding 1)
+  (setq web-mode-script-padding 1)
+  (setq web-mode-block-padding 0)
   )
 (add-hook 'web-mode-hook  'my-web-mode-hook)
+(setq web-mode-enable-css-colorization t)
 
-(setq-default indent-tabs-mode nil)
-(setq web-mode-attr-indent-offset 2)
-(setq web-mode-markup-indent-offset 2)
-(setq web-mode-css-indent-offset 2)
-(setq web-mode-code-indent-offset 2)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Emmet
@@ -564,7 +618,6 @@
 
 
 ;; spacygray
-(global-hl-line-mode 1)
 
 ;; powerline
 (require 'powerline)

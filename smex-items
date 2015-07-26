@@ -1,19 +1,19 @@
 
 ;; ----- smex-history -----
 (
- minor-mode-menu-from-indicator
- customize-group
- customize-face
- web-mode
- getenv
- view-echo-area-messages
- shell
+ ido-mode
+ ivy-mode
+ find-file
+ ivy-minibuffer-shrink
+ ivy-recentf
+ swiper
+ package-install
 )
 
 ;; ----- smex-data -----
 (
  (package-menu-mode . 2)
- (package-install . 85)
+ (package-install . 88)
  (dired . 5)
  (coffee-watch . 2)
  (coffee-mode-menu . 1)
@@ -27,7 +27,7 @@
  (run-lisp . 2)
  (run-geiser . 9)
  (electric-pair-mode . 2)
- (package-autoremove . 4)
+ (package-autoremove . 6)
  (neotree-show . 1)
  (neotree . 2)
  (package-refresh-contents . 9)
@@ -84,7 +84,7 @@
  (version . 1)
  (magit-branch-manager . 3)
  (helm-recentf . 3)
- (inf-ruby . 5)
+ (inf-ruby . 8)
  (evil-window-set-height . 1)
  (ansi-term . 4)
  (package-initialize . 1)
@@ -115,7 +115,7 @@
  (css-mode . 2)
  (ido-make-directory . 3)
  (make-directory . 1)
- (ido-mode . 2)
+ (ido-mode . 11)
  (list-directory . 2)
  (dired-display-file . 5)
  (dired-summary . 1)
@@ -137,4 +137,14 @@
  (getenv . 6)
  (view-echo-area-messages . 1)
  (minor-mode-menu-from-indicator . 1)
+ (column-highlight-mode . 1)
+ (package-list-packages . 3)
+ (ivy-mode . 3)
+ (couns-git . 6)
+ (ivy-minibuffer-grow . 1)
+ (isearch-exit . 1)
+ (swiper . 2)
+ (ivy-recentf . 3)
+ (ivy-minibuffer-shrink . 1)
+ (find-file . 1)
 )
