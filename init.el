@@ -39,9 +39,9 @@
 ;; 主题
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 
- (load-theme 'atom-one-dark t)
+;; (load-theme 'atom-one-dark t)
+(load-theme 'spacegray t)
 ;; (load-theme 'flatland t)
-;; (load-theme 'spacegray t)
 ;;(load-theme 'eclipse t)
 ;; (load-theme 'smyx t)
 ;; (load-theme 'brin t)
@@ -62,9 +62,11 @@
 (global-hl-line-mode 1)
 ;; (column-number-mode 1)
 (custom-set-faces
- '(col-highlight ((t (:background "#3F4A5A"))))
- '(hl-line ((t (:background "#4A4F5A"))))
- '(lazy-highlight ((t (:background "#aa8888" :foreground "#ffffff")))))
+ ;; '(col-highlight ((t (:background "#3F4A5A"))))
+ '(hl-line ((t (:background "#2F333A"))))
+ ;'(hl-line ((t (:background "#999999"))))
+ ;; '(lazy-highlight ((t (:background "#aa8888" :foreground "#ffffff"))))
+ )
 
 ;;指针颜色
 (set-cursor-color "white")
@@ -270,8 +272,8 @@
 ; (global-set-key (kbd "C-x C-m") 'helm-imenu)
 
 ; (define-key helm-map (kbd "<tab>") nil)
-;(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
-;(define-key helm-map (kbd "C-z") 'helm-select-action)
+(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
+(define-key helm-map (kbd "C-z") 'helm-select-action)
 
 ;(add-to-list 'helm-completing-read-handlers-alist '(find-file . ido))
 
