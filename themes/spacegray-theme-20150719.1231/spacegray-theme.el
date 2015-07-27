@@ -50,13 +50,15 @@
 (let* ((class '((class color) (min-colors 89)))
        (256color (eq (display-color-cells (selected-frame)) 256))
 
-       (background "#232830") ;; sidebar-container
+       ; (background "#232830") ;; sidebar-container
+       (background "#2A2F3A") ;; sidebar-container, by lafwind
        (current-line "#343d46") ;; tree-row
        (far-background "#1c1f26") ;; panel-control
        (subtle "#a7adba") ;; tree-row-hover-disclosure-button-control
        (selection "#ebcb8b") ;; tab-control-dirty-tab-close-button
        (secondary-selection "#bf616a") ;; tab-control-hover-tab-close-button
-       (foreground "#ffffff")
+       ;; (foreground "#ffffff")
+       (foreground "#C0C5CE") ;;; by lafwind
        (comment "#4f5b67") ;; table-row
        (red "#bf616a") ;; tab-control-hover-tab-close-button
        (orange "#DCA432") ;; darker tab-control-dirty-tab-close-butto
@@ -66,6 +68,15 @@
        (blue "#89AAEB") ;; complement tab-control-dirty-tab-close-button
        (purple "#C189EB") ;; complement tab-control-dirty-tab-close-button
        (lafwind_pink "#E55086")
+       (lafwind_hot_pink "#FF69AF")
+       (lafwind_red "#BF616A")
+       (lafwind_blue "#8FA1B3")
+       (lafwind_sky_blue "#6198D5")
+       (lafwind_green "#A3BE8C")
+       (lafwind_spring_green "#69AA69")
+       (lafwind_purple "#B48EAD")
+       (lafwind_yellow "#EBCB8B")
+       (lafwind_selection "#EE793F")
        )
 
   (custom-theme-set-faces
@@ -75,21 +86,36 @@
    `(bold-italic ((,class (:slant italic :weight bold))))
    `(underline ((,class (:underline t))))
    `(italic ((,class (:slant italic))))
-   `(font-lock-builtin-face ((,class (:foreground "LightCoral"))))
+
    `(font-lock-comment-delimiter-face ((,class (:foreground ,comment))))
    `(font-lock-comment-face ((,class (:foreground ,comment))))
-   `(font-lock-constant-face ((,class (:foreground ,green))))
    `(font-lock-doc-face ((,class (:foreground "moccasin"))))
    `(font-lock-doc-string-face ((,class (:foreground ,yellow))))
-   `(font-lock-function-name-face ((,class (:foreground ,orange))))
-   `(font-lock-keyword-face ((,class (:foreground ,blue))))
+
+   ;;; Modified by lafwind
+   ; `(font-lock-function-name-face ((,class (:foreground ,orange))))
+   ; `(font-lock-keyword-face ((,class (:foreground ,blue))))
+   ; `(font-lock-variable-name-face ((,class (:foreground ,yellow))))
+   ; `(font-lock-type-face ((,class (:foreground "CadetBlue1"))))
+   ; `(font-lock-constant-face ((,class (:foreground ,green))))
+   ; `(font-lock-string-face ((,class (:foreground "burlywood"))))
+   ; `(font-lock-builtin-face ((,class (:foreground "LightCoral"))))
+   ; `(font-lock-preprocessor-face ((,class (:foreground "gold"))))
+
+   ;;; by lafwind
+   `(font-lock-function-name-face ((,class (:foreground ,lafwind_blue))))
+   `(font-lock-keyword-face ((,class (:foreground ,lafwind_purple))))
+   `(font-lock-variable-name-face ((,class (:foreground ,lafwind_red))))
+   `(font-lock-type-face ((,class (:foreground ,lafwind_yellow))))
+   `(font-lock-constant-face ((,class (:foreground ,lafwind_sky_blue))))
+   `(font-lock-string-face ((,class (:foreground ,lafwind_green))))
+   `(font-lock-builtin-face ((,class (:foreground ,lafwind_spring_green))))
+   `(font-lock-preprocessor-face ((,class (:foreground ,lafwind_hot_pink))))
+
+
    `(font-lock-negation-char-face ((,class (:foreground ,blue))))
-   `(font-lock-preprocessor-face ((,class (:foreground "gold"))))
    `(font-lock-regexp-grouping-backslash ((,class (:foreground ,yellow))))
    `(font-lock-regexp-grouping-construct ((,class (:foreground ,purple))))
-   `(font-lock-string-face ((,class (:foreground "burlywood"))))
-   `(font-lock-type-face ((,class (:foreground "CadetBlue1"))))
-   `(font-lock-variable-name-face ((,class (:foreground ,yellow))))
    `(font-lock-warning-face ((,class (:weight bold :foreground ,red))))
    `(shadow ((,class (:foreground ,comment))))
    `(success ((,class (:foreground "SeaGreen2"))))
@@ -633,7 +659,9 @@
    `(vc-annotate-very-old-color nil)
    `(vc-annotate-background nil)
    `(ansi-color-names-vector (vector ,foreground ,red ,green ,yellow ,blue ,purple ,aqua ,background))
-   '(ansi-color-faces-vector [default bold shadow italic underline bold bold-italic bold]))
+   ; '(ansi-color-faces-vector [default bold shadow italic underline bold bold-italic bold])
+   '(ansi-color-faces-vector [default bold shadow italic bold bold-italic bold])
+   )
 )
 ;;;###autoload
 (when (and (boundp 'custom-theme-load-path)

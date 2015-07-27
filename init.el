@@ -15,6 +15,10 @@
 ;; melpa
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.org/packages/") t)
+
+(add-to-list 'package-archives
+             '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+
 (when (< emacs-major-version 24)
   ;; For important compatibility libraries like cl-lib
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
@@ -62,6 +66,7 @@
 ;; (setq molokai-theme-kit t)
 
 (global-hl-line-mode 1)
+;; (setq-default line-spacing 8)
 ;; (column-number-mode 1)
 (custom-set-faces
  ;; '(col-highlight ((t (:background "#3F4A5A"))))
@@ -124,11 +129,11 @@
 ;; (setq-default right-fringe-width  0)
 ;; (set-face-attribute 'fringe nil :background "#363a4a")
 
-; (fringe-mode 0)
+(fringe-mode 0)
 ;; (setq visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow))
 ;; (global-visual-line-mode nil)
-(setq-default right-fringe-width 0)
-(setq-default left-fringe-width 0)
+; (setq-default right-fringe-width 0)
+; (setq-default left-fringe-width 0)
 ;; (add-to-list 'default-frame-alist '(left-fringe . 0))
 ;; (add-to-list 'default-frame-alist '(right-fringe . 1))
 ;; (set-face-attribute 'fringe nil :background "#232830")
@@ -258,7 +263,7 @@
  '(neo-banner-face ((t (:foreground "#515A66"))))
  '(neo-header-face ((t (:foreground "#515A66"))))
  '(neo-button-face ((t (:foreground "#515A66"))))
- '(neo-root-dir-face ((t (:foreground "#515A66"))))
+ '(neo-root-dir-face ((t (:foreground "EEA2AD"))))
 )
 
 (add-hook 'neotree-mode-hook 'change-neotree-background-color)
@@ -271,7 +276,8 @@
 
 (defun neotree-set-margins ()
   "Set margins in current buffer."
-  (setq left-margin-width 2)
+  (setq left-margin-width 1)
+  (setq top-margin-width 1)
   (setq right-margin-width 0)
   )
 
@@ -555,7 +561,11 @@
 
 (evil-leader/set-key
   "gs" 'magit-status
-  "gl" 'magit-log
+  "gr" 'magit-remote-add
+  "gi" 'magit-init
+  "gc" 'magit-clone
+  "gl" 'magit-log-all
+  "gd" 'magit-file-delete
  )
 
 ;;; evil-nerd-commenter
@@ -657,7 +667,6 @@
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.haml?\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.css?\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.scss?\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.jsx?\\'" . web-mode))
@@ -700,10 +709,19 @@
 (autoload 'scss-mode "scss-mode")
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; haml
+
+(require 'haml-mode)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; scheme
 ;; geiser
 (setq geiser-active-implementations '(guile))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Haskell mode
+(add-hook 'haskell-mode-hook 'haskell-indentation-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; sql-indent
