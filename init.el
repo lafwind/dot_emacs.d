@@ -27,10 +27,12 @@
 (scroll-bar-mode 0)
 
 (setq max-mini-window-height 1.00)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;; don't auto break line
 (set-default 'truncate-lines t)
 
+(setq ring-bell-function 'ignore)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; 删除空行和行尾空格
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
@@ -122,7 +124,11 @@
 ;; (setq-default right-fringe-width  0)
 ;; (set-face-attribute 'fringe nil :background "#363a4a")
 
-(fringe-mode 0)
+; (fringe-mode 0)
+;; (setq visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow))
+;; (global-visual-line-mode nil)
+(setq-default right-fringe-width 0)
+(setq-default left-fringe-width 0)
 ;; (add-to-list 'default-frame-alist '(left-fringe . 0))
 ;; (add-to-list 'default-frame-alist '(right-fringe . 1))
 ;; (set-face-attribute 'fringe nil :background "#232830")
@@ -204,7 +210,7 @@
 (require 'neotree)
 (global-set-key [f8] 'neotree-toggle)
 (setq neo-theme 'ascii) ; 'classic, 'nerd, 'ascii, 'arrow
-(setq neo-window-width 36)
+(setq neo-window-width 39)
 ; (setq neo-smart-open t)
 
 (setq projectile-switch-project-action 'neotree-projectile-action)
@@ -240,6 +246,8 @@
             (define-key evil-normal-state-local-map (kbd "q") 'neotree-hide)
             (define-key evil-normal-state-local-map (kbd "RET") 'neotree-enter)))
 
+
+
 ;;; neotree UI
 
 (custom-set-faces
@@ -263,7 +271,7 @@
 
 (defun neotree-set-margins ()
   "Set margins in current buffer."
-  (setq left-margin-width 1)
+  (setq left-margin-width 2)
   (setq right-margin-width 0)
   )
 
