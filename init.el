@@ -63,7 +63,7 @@
 ;; (column-number-mode 1)
 (custom-set-faces
  ;; '(col-highlight ((t (:background "#3F4A5A"))))
- '(hl-line ((t (:background "#2F333A"))))
+ '(hl-line ((t (:background "#323A43"))))
  ;'(hl-line ((t (:background "#999999"))))
  ;; '(lazy-highlight ((t (:background "#aa8888" :foreground "#ffffff"))))
  )
@@ -76,19 +76,16 @@
 
 (set-face-attribute 'vertical-border
                     nil
-                    :foreground "#3A3F4A")
+                    :foreground "#232830")
 
 ;; 显示行列号
 (setq column-number-mode t)
 (setq line-number-mode t)
 (column-number-mode t)     ;在模式行上显示行号列号
-(setq linum-format "  %d ")
+(setq linum-format "  %d  ")
 ;; (setq linum-format "%5d \u2502 ")
 ;; (custom-set-faces '(linum ((t (:foreground "pink" :background "#363a4a" :box nil)))) )
 
-;; (setq-default left-fringe-width  0)
-;; (setq-default right-fringe-width  0)
-;; (set-face-attribute 'fringe nil :background "#363a4a")
 
 ;; (custom-set-faces '(linum ((t (:foreground "pink")))) )
 
@@ -120,11 +117,21 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; fringe mode
-(fringe-mode '(8 . 1))
-;; (defun hide-fringes ()
-;;   (set-window-fringes (selected-window) 1))
-;;
-;; (add-hook 'neotree-mode-hook 'hide-fringes)
+
+;; (setq-default left-fringe-width  0)
+;; (setq-default right-fringe-width  0)
+;; (set-face-attribute 'fringe nil :background "#363a4a")
+
+(fringe-mode 0)
+;; (add-to-list 'default-frame-alist '(left-fringe . 0))
+;; (add-to-list 'default-frame-alist '(right-fringe . 1))
+;; (set-face-attribute 'fringe nil :background "#232830")
+
+;; (fringe-mode '(8 . 1))
+; (defun hide-fringes ()
+;   (set-face-attribute 'left-fringe nil :background "#232830"))
+;; ;;
+; (add-hook 'neotree-mode-hook 'hide-fringes)
 
 ;; font
 ;; (set-default-font "Monaco-11")
@@ -236,8 +243,34 @@
 ;;; neotree UI
 
 (custom-set-faces
- '(neo-dir-link-face ((t (:foreground "#9999EE"))))
- '(neo-file-link-face ((t (:foreground "#A8B1B8")))))
+ '(neo-dir-link-face ((t (:foreground "#515A66"))))
+ ; '(neo-file-link-face ((t (:foreground "#A8B1B8"))))
+ '(neo-file-link-face ((t (:foreground "#919AA6"))))
+ '(neo-expand-btn-face ((t (:foreground "#515A66"))))
+ '(neo-banner-face ((t (:foreground "#515A66"))))
+ '(neo-header-face ((t (:foreground "#515A66"))))
+ '(neo-button-face ((t (:foreground "#515A66"))))
+ '(neo-root-dir-face ((t (:foreground "#515A66"))))
+)
+
+(add-hook 'neotree-mode-hook 'change-neotree-background-color)
+(add-hook 'neotree-mode-hook 'neotree-set-margins)
+
+(defun change-neotree-background-color ()
+  (interactive)
+  (setq buffer-face-mode-face `(:background "#232830"))
+  (buffer-face-mode 1))
+
+(defun neotree-set-margins ()
+  "Set margins in current buffer."
+  (setq left-margin-width 1)
+  (setq right-margin-width 0)
+  )
+
+
+;; (add-hook 'neotree-mode-hook
+;;             (lambda ()
+;;               (set-background-color "#232830")))
 (custom-set-variables)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
