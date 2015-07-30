@@ -179,7 +179,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; yasnippet
-(yas-global-mode 1)
+;; (yas-global-mode 1)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; flycheck
@@ -307,7 +307,7 @@
 (evil-leader/set-key
   "hf" 'helm-find
   "hr" 'helm-recentf
-  "m" 'helm-imenu
+  "hm" 'helm-imenu
   "hf" 'helm-find-files
   "hb" 'helm-buffers-list
 )
@@ -431,6 +431,7 @@
   "/" 'swiper
   "ir" 'ivy-recentf
   "if" 'ivy-couns-git
+  "im" 'imenu
 )
 
 ;;; find-file-in-project
@@ -489,6 +490,7 @@
 ;; (define-key evil-motion-state-map "ge" nil)
 (define-key evil-motion-state-map (kbd "ge") 'end-of-line)
 (define-key evil-normal-state-map (kbd "ge") 'end-of-line)
+(define-key evil-visual-state-map (kbd "ge") (kbd "$h"))
 (define-key evil-normal-state-map (kbd "gb") 'beginning-of-line)
 
 ; (global-set-key [escape] 'keyboard-quit)
@@ -530,8 +532,9 @@
   "wh" 'windmove-left
   "vs" 'split-window-right
   "hs" 'split-window-below
-  "ww" 'delete-other-windows
   "wm" 'maximize-window
+  "ww" 'delete-other-windows
+  "wx" 'delete-window
 
   "xo" 'pop-global-mark
 
@@ -620,8 +623,8 @@
   "rs" 'rinari-web-server
   "rS" 'rinari-web-server-restart
   "r!s" 'projectile-rails-sever
-  "rc" 'rinari-console
-  "rC" 'projectile-rails-console
+  "rk" 'rinari-console
+  "rK" 'projectile-rails-console
   "re" 'rinari-test
   "rq" 'rinari-sql
 
@@ -643,14 +646,14 @@
 
   "rff" 'rinari-find-file-in-project
   "rfn" 'rinari-find-configuration
-  "rfg" 'projectile-rails-goto-gemfile
-  "rfr" 'projectile-rails-goto-routes
   "rfl" 'rinari-find-log
   "rfL" 'projectile-rails-find-log
   "rfe" 'rinari-find-environment
-  "rfs" 'projectile-rails-goto-schema
   "rfx" 'rinari-find-fixture
   "rfX" 'projectile-rails-find-fixture
+  "rfg" 'projectile-rails-goto-gemfile
+  "rfr" 'projectile-rails-goto-routes
+  "rfs" 'projectile-rails-goto-schema
 
 )
 
@@ -668,7 +671,6 @@
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.css?\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.scss?\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.jsx?\\'" . web-mode))
 
 (defun my-web-mode-hook ()
@@ -706,6 +708,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; scss-mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(add-hook 'scss-mode 'scss-mode)
 (autoload 'scss-mode "scss-mode")
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
 
@@ -736,6 +739,8 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Coffee Script
+
+(add-to-list 'auto-mode-alist '("\\.coffee$\\'" . coffee-mode))
 
 ;; automatically clean up bad whitespace
 (setq whitespace-action '(auto-cleanup))
