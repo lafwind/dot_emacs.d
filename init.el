@@ -5,19 +5,18 @@
 ;;; code:
 ;;; Add the original Emacs Lisp Package Archive
 (add-to-list 'package-archives
-             '("elpa" . "http://tromey.com/elpa/"))
+	     '("elpa" . "http://tromey.com/elpa/"))
 
 ;;; Add the user-contributed repository
 (add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/"))
-
+	     '("marmalade" . "http://marmalade-repo.org/packages/"))
 
 ;; melpa
 (add-to-list 'package-archives
-             '("melpa" . "http://melpa.org/packages/") t)
+	     '("melpa" . "http://melpa.org/packages/") t)
 
 (add-to-list 'package-archives
-             '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+	     '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 
 (when (< emacs-major-version 24)
   ;; For important compatibility libraries like cl-lib
@@ -45,8 +44,9 @@
 ;; 主题
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 
+(load-theme 'material-one t)
+;; (load-theme 'spacegray t)
 ;; (load-theme 'atom-one-dark t)
-(load-theme 'spacegray t)
 ;; (load-theme 'flatland t)
 ;;(load-theme 'eclipse t)
 ;; (load-theme 'smyx t)
@@ -70,8 +70,8 @@
 ;; (column-number-mode 1)
 (custom-set-faces
  ;; '(col-highlight ((t (:background "#3F4A5A"))))
- '(hl-line ((t (:background "#323A43"))))
- ;'(hl-line ((t (:background "#999999"))))
+ ;; '(hl-line ((t (:background "#323A43"))))
+					;'(hl-line ((t (:background "#999999"))))
  ;; '(lazy-highlight ((t (:background "#aa8888" :foreground "#ffffff"))))
  )
 
@@ -82,8 +82,9 @@
 (set-mouse-color "white")
 
 (set-face-attribute 'vertical-border
-                    nil
-                    :foreground "#232830")
+		    nil
+		    :foreground "#1e1e1e")
+					; :foreground "#232830") ;; for spacegray
 
 ;; 显示行列号
 (setq column-number-mode t)
@@ -109,10 +110,10 @@
 
 (setq default-directory "~/projects/")  ;寻找文件的默认路径
 
-; (setq inhibit-splash-screen t)
-; (setq inhibit-startup-screen t)
+					; (setq inhibit-splash-screen t)
+					; (setq inhibit-startup-screen t)
 ;;(setq inhibit-startup-message t)
-; (setq inhibit-startup-message t)
+					; (setq inhibit-startup-message t)
 
 (setq inhibit-startup-message t)
 (setq initial-scratch-message "")
@@ -132,17 +133,17 @@
 (fringe-mode 0)
 ;; (setq visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow))
 ;; (global-visual-line-mode nil)
-; (setq-default right-fringe-width 0)
-; (setq-default left-fringe-width 0)
+					; (setq-default right-fringe-width 0)
+					; (setq-default left-fringe-width 0)
 ;; (add-to-list 'default-frame-alist '(left-fringe . 0))
 ;; (add-to-list 'default-frame-alist '(right-fringe . 1))
 ;; (set-face-attribute 'fringe nil :background "#232830")
 
 ;; (fringe-mode '(8 . 1))
-; (defun hide-fringes ()
-;   (set-face-attribute 'left-fringe nil :background "#232830"))
+					; (defun hide-fringes ()
+					;   (set-face-attribute 'left-fringe nil :background "#232830"))
 ;; ;;
-; (add-hook 'neotree-mode-hook 'hide-fringes)
+					; (add-hook 'neotree-mode-hook 'hide-fringes)
 
 ;; font
 ;; (set-default-font "Monaco-11")
@@ -162,15 +163,15 @@
      (define-key company-active-map [S-tab] 'company-select-previous)
      (define-key company-active-map [tab] 'company-select-next)))
 (setq company-selection-wrap-around t)
-;
-; ;;; UI
+					;
+					; ;;; UI
 (require 'color)
 
-;(bg (face-attribute 'default :background))
+					;(bg (face-attribute 'default :background))
 (let ((bg (face-attribute 'default :background)))
   (custom-set-faces
    `(company-tooltip ((t (:inherit default :background ,(color-lighten-name bg 2)))))
-   ; `(company-tooltip ((t (:inherit default :background "black"))))
+					; `(company-tooltip ((t (:inherit default :background "black"))))
    `(company-scrollbar-bg ((t (:background ,(color-lighten-name bg 10)))))
    `(company-scrollbar-fg ((t (:background ,(color-lighten-name bg 5)))))
    `(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
@@ -216,62 +217,64 @@
 (global-set-key [f8] 'neotree-toggle)
 (setq neo-theme 'ascii) ; 'classic, 'nerd, 'ascii, 'arrow
 (setq neo-window-width 39)
-; (setq neo-smart-open t)
+					; (setq neo-smart-open t)
 
 (setq projectile-switch-project-action 'neotree-projectile-action)
 
 (defun neotree-project-dir ()
-    "Open NeoTree using the git root."
-    (interactive)
-    (let ((project-dir (ffip-project-root))
-          (file-name (buffer-file-name)))
-      (if project-dir
-          (progn
-            (neotree-dir project-dir)
-            (neotree-find file-name))
-        (neotree-find))))
-        ; (message "Could not find git project root."))))
+  "Open NeoTree using the git root."
+  (interactive)
+  (let ((project-dir (ffip-project-root))
+	(file-name (buffer-file-name)))
+    (if project-dir
+	(progn
+	  (neotree-dir project-dir)
+	  (neotree-find file-name))
+      (neotree-find))))
+					; (message "Could not find git project root."))))
 
 (evil-leader/set-key
   "nn" 'neotree-project-dir
   )
 
 (add-hook 'neotree-mode-hook
-          (lambda ()
-            (define-key evil-normal-state-local-map (kbd "o") 'neotree-enter)
-            (define-key evil-normal-state-local-map (kbd "r") 'neotree-rename-node)
-            (define-key evil-normal-state-local-map (kbd "d") 'neotree-delete-node)
-            (define-key evil-normal-state-local-map (kbd "a") 'neotree-create-node)
-            (define-key evil-normal-state-local-map (kbd "u") 'neotree-refresh)
-            (define-key evil-normal-state-local-map (kbd "c") 'neotree-change-root)
-            (define-key evil-normal-state-local-map (kbd "p") 'neotree-select-up-node)
-            (define-key evil-normal-state-local-map (kbd "s") 'neotree-select-next-sibling-node)
-            (define-key evil-normal-state-local-map (kbd "S") 'neotree-select-previous-sibling-node)
-            (define-key evil-normal-state-local-map (kbd "th") 'neotree-hidden-file-toggle)
-            (define-key evil-normal-state-local-map (kbd "q") 'neotree-hide)
-            (define-key evil-normal-state-local-map (kbd "RET") 'neotree-enter)))
+	  (lambda ()
+	    (define-key evil-normal-state-local-map (kbd "o") 'neotree-enter)
+	    (define-key evil-normal-state-local-map (kbd "r") 'neotree-rename-node)
+	    (define-key evil-normal-state-local-map (kbd "d") 'neotree-delete-node)
+	    (define-key evil-normal-state-local-map (kbd "a") 'neotree-create-node)
+	    (define-key evil-normal-state-local-map (kbd "u") 'neotree-refresh)
+	    (define-key evil-normal-state-local-map (kbd "c") 'neotree-change-root)
+	    (define-key evil-normal-state-local-map (kbd "p") 'neotree-select-up-node)
+	    (define-key evil-normal-state-local-map (kbd "s") 'neotree-select-next-sibling-node)
+	    (define-key evil-normal-state-local-map (kbd "S") 'neotree-select-previous-sibling-node)
+	    (define-key evil-normal-state-local-map (kbd "th") 'neotree-hidden-file-toggle)
+	    (define-key evil-normal-state-local-map (kbd "q") 'neotree-hide)
+	    (define-key evil-normal-state-local-map (kbd "RET") 'neotree-enter)))
 
 
 
 ;;; neotree UI
 
-(custom-set-faces
- '(neo-dir-link-face ((t (:foreground "#515A66"))))
- ; '(neo-file-link-face ((t (:foreground "#A8B1B8"))))
- '(neo-file-link-face ((t (:foreground "#919AA6"))))
- '(neo-expand-btn-face ((t (:foreground "#515A66"))))
- '(neo-banner-face ((t (:foreground "#515A66"))))
- '(neo-header-face ((t (:foreground "#515A66"))))
- '(neo-button-face ((t (:foreground "#515A66"))))
- '(neo-root-dir-face ((t (:foreground "EEA2AD"))))
-)
+;;; for spacegray
+;; (custom-set-faces
+;;  '(neo-dir-link-face ((t (:foreground "#515A66"))))
+;;  ; '(neo-file-link-face ((t (:foreground "#A8B1B8"))))
+;;  '(neo-file-link-face ((t (:foreground "#919AA6"))))
+;;  '(neo-expand-btn-face ((t (:foreground "#515A66"))))
+;;  '(neo-banner-face ((t (:foreground "#515A66"))))
+;;  '(neo-header-face ((t (:foreground "#515A66"))))
+;;  '(neo-button-face ((t (:foreground "#515A66"))))
+;;  '(neo-root-dir-face ((t (:foreground "EEA2AD"))))
+;; )
 
 (add-hook 'neotree-mode-hook 'change-neotree-background-color)
 (add-hook 'neotree-mode-hook 'neotree-set-margins)
 
 (defun change-neotree-background-color ()
   (interactive)
-  (setq buffer-face-mode-face `(:background "#232830"))
+					; (setq buffer-face-mode-face `(:background "#232830")) ;; for spacegray
+  (setq buffer-face-mode-face `(:background "#1e1e1e"))
   (buffer-face-mode 1))
 
 (defun neotree-set-margins ()
@@ -292,9 +295,9 @@
 
 (require 'helm)
 (require 'helm-config)
-; (require 'helm-themes)
-;(helm-mode 1)
-;(setq enable-recursive-minibuffers t)
+					; (require 'helm-themes)
+					;(helm-mode 1)
+					;(setq enable-recursive-minibuffers t)
 
 (setq helm-buffers-fuzzy-matching t)
 (setq helm-imenu-fuzzy-matching t)
@@ -310,19 +313,19 @@
   "hm" 'helm-imenu
   "hf" 'helm-find-files
   "hb" 'helm-buffers-list
-)
+  )
 
-;(global-set-key (kbd "M-x") 'helm-M-x)
-;(global-set-key (kbd "M-x") 'helm-M-x)
-;(global-set-key (kbd "C-x C-f") 'helm-find-files)
-; (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
-; (global-set-key (kbd "C-x C-m") 'helm-imenu)
+					;(global-set-key (kbd "M-x") 'helm-M-x)
+					;(global-set-key (kbd "M-x") 'helm-M-x)
+					;(global-set-key (kbd "C-x C-f") 'helm-find-files)
+					; (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
+					; (global-set-key (kbd "C-x C-m") 'helm-imenu)
 
-; (define-key helm-map (kbd "<tab>") nil)
+					; (define-key helm-map (kbd "<tab>") nil)
 (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
 (define-key helm-map (kbd "C-z") 'helm-select-action)
 
-;(add-to-list 'helm-completing-read-handlers-alist '(find-file . ido))
+					;(add-to-list 'helm-completing-read-handlers-alist '(find-file . ido))
 
 ;;; helm UI
 (setq helm-display-header-line nil) ;; t by default
@@ -335,8 +338,8 @@
 ;;; projectile
 (projectile-global-mode)
 (projectile-mode t)
-; (setq projectile-completion-system 'helm)
-; (helm-projectile-on)
+					; (setq projectile-completion-system 'helm)
+					; (helm-projectile-on)
 
 ;; Show projectile lists by most recently active
 (setq projectile-sort-order (quote recently-active))
@@ -345,7 +348,7 @@
   "pp" 'projectile-switch-project
   "pf" 'projectile-find-file
   "pr" 'projectile-recentf
-)
+  )
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -364,24 +367,24 @@
 (setq ido-auto-merge-work-directories-length -1)
 
 (add-hook 'ido-setup-hook
-  (lambda ()
-    (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
-    (define-key ido-completion-map (kbd "C-p") 'ido-prev-match)
-    (define-key ido-completion-map (kbd "C-j") 'ido-next-match)
-    (define-key ido-completion-map (kbd "C-k") 'ido-prev-match)))
-; (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
-; (define-key ido-completion-map (kbd "C-p") 'ido-prev-match)
-;(define-key helm-map (kbd "C-z") 'helm-select-action)
+	  (lambda ()
+	    (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
+	    (define-key ido-completion-map (kbd "C-p") 'ido-prev-match)
+	    (define-key ido-completion-map (kbd "C-j") 'ido-next-match)
+	    (define-key ido-completion-map (kbd "C-k") 'ido-prev-match)))
+					; (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
+					; (define-key ido-completion-map (kbd "C-p") 'ido-prev-match)
+					;(define-key helm-map (kbd "C-z") 'helm-select-action)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; flx-ido
- (require 'flx-ido)
+(require 'flx-ido)
 (ido-mode 1)
 (ido-everywhere 1)
 (flx-ido-mode 1)
 ;;; disable ido faces to see flx highlights.
 (setq ido-enable-flex-matching t)
- (setq ido-use-faces nil)
+(setq ido-use-faces nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; ido-vertical-mode
@@ -393,13 +396,13 @@
 (setq ido-vertical-show-count t)
 (setq ido-use-faces t)
 (set-face-attribute 'ido-vertical-first-match-face nil
-                    :background nil
-                    :foreground "orange")
+		    :background nil
+		    :foreground "orange")
 (set-face-attribute 'ido-vertical-only-match-face nil
-                    :background nil
-                    :foreground nil)
- (set-face-attribute 'ido-vertical-match-face nil
-                    :foreground nil)
+		    :background nil
+		    :foreground nil)
+(set-face-attribute 'ido-vertical-match-face nil
+		    :foreground nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; ivy mode
@@ -416,12 +419,12 @@
   "Find file in the current Git repository."
   (interactive)
   (let* ((default-directory (locate-dominating-file
-                             default-directory ".git"))
-         (cands (split-string
-                 (shell-command-to-string
-                  "git ls-files --full-name --")
-                 "\n"))
-         (file (ivy-read "Find file: " cands)))
+			     default-directory ".git"))
+	 (cands (split-string
+		 (shell-command-to-string
+		  "git ls-files --full-name --")
+		 "\n"))
+	 (file (ivy-read "Find file: " cands)))
     (when file
       (find-file file))))
 (global-set-key (kbd "C-c f") 'couns-git)
@@ -432,17 +435,17 @@
   "ir" 'ivy-recentf
   "if" 'ivy-couns-git
   "im" 'imenu
-)
+  )
 
 ;;; find-file-in-project
 
 (require 'find-file-in-project)
 (autoload 'ivy-read "ivy")
-; (setq projectile-completion-system 'ivy)
+					; (setq projectile-completion-system 'ivy)
 
 (evil-leader/set-key
   "fp" 'find-file-in-project
-)
+  )
 
 
 
@@ -450,7 +453,7 @@
 ;; smex
 (require 'smex) ; Not needed if you use package.el
 (smex-initialize) ; Can be omitted. This might cause a (minimal) delay
-                                        ; when Smex is auto-initialized on its first run.
+					; when Smex is auto-initialized on its first run.
 
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
@@ -461,20 +464,20 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; smartparens
 ;; global
-; (require 'smartparens-config)
-; ; (smartparens-global-mode t)
+					; (require 'smartparens-config)
+					; ; (smartparens-global-mode t)
 
 ;; highlights matching pairs
-; (show-smartparens-global-mode t)
+					; (show-smartparens-global-mode t)
 
-; (set-face-attribute 'sp-pair-overlay-face nil :background "black")
+					; (set-face-attribute 'sp-pair-overlay-face nil :background "black")
 
 
 (show-paren-mode t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; highlight-parentheses
-; (require 'highlight-parentheses)
+					; (require 'highlight-parentheses)
 
 ;;; evil mode
 (require 'evil)
@@ -493,13 +496,13 @@
 (define-key evil-visual-state-map (kbd "ge") (kbd "$h"))
 (define-key evil-normal-state-map (kbd "gb") 'beginning-of-line)
 
-; (global-set-key [escape] 'keyboard-quit)
+					; (global-set-key [escape] 'keyboard-quit)
 (global-set-key [escape] 'keyboard-escape-quit)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; For shell
 (add-hook 'term-mode-hook (lambda()
-                (yas-minor-mode -1)))
+			    (yas-minor-mode -1)))
 
 (setq shell-command-switch "-ic")
 
@@ -514,7 +517,7 @@
 (evil-leader/set-key
   "zsh" 'ansi-term
   "sh" 'shell-command
-)
+  )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; evil-leader
@@ -548,14 +551,14 @@
 
   ;; Mode
   ",,w" 'web-mode
-)
+  )
 
 ;;; ido
 (evil-leader/set-key
   "xf" 'ido-find-file
   "xb" 'ido-switch-buffer
   "xxb" 'buffer-menu
-)
+  )
 
 ;;; Magit
 
@@ -569,11 +572,11 @@
   "gc" 'magit-clone
   "gl" 'magit-log-all
   "gd" 'magit-file-delete
- )
+  )
 
 ;;; evil-nerd-commenter
 
-; (evilnc-default-hotkeys)
+					; (evilnc-default-hotkeys)
 
 ;; evil-nerd-comment:  Emacs key bindings
 (global-set-key (kbd "M-;") 'evilnc-comment-or-uncomment-lines)
@@ -591,7 +594,7 @@
   "cr" 'comment-or-uncomment-region
   "cv" 'evilnc-toggle-invert-comment-line-by-line
   "\\" 'evilnc-comment-operator ; if you prefer backslash key
-)
+  )
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -609,7 +612,7 @@
 
 ;;;
 (require 'rinari)
-; (global-rinari-mode t)
+					; (global-rinari-mode t)
 
 ;;; projectile-rails
 (add-hook 'projectile-mode-hook 'projectile-rails-on)
@@ -655,7 +658,7 @@
   "rfr" 'projectile-rails-goto-routes
   "rfs" 'projectile-rails-goto-schema
 
-)
+  )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; web-mode
@@ -704,6 +707,11 @@
 ;;; load & configure js2-mode
 (autoload 'js2-mode "js2-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+(setq js2-mode-hook
+      '(lambda () (progn
+		    (set-variable 'indent-tabs-mode nil)
+		    (set-variable 'tab-width 4)
+		    )))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; scss-mode
@@ -756,7 +764,7 @@
 (global-set-key (kbd "C-=") 'er/expand-region)
 (evil-leader/set-key
   "er" 'er/expand-region
-)
+  )
 
 
 
@@ -768,13 +776,13 @@
 ;; (display-time-mode t)
 (require 'powerline-my-theme)
 (powerline-my-theme)
-; (powerline-default-theme)
+					; (powerline-default-theme)
 
 (set-face-attribute 'mode-line nil :box nil)
 (set-face-attribute 'mode-line-inactive nil :box nil)
 
 ;;; Longline
-; (require 'longlines)
+					; (require 'longlines)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; indent guide
