@@ -7,31 +7,42 @@
                                     nil))
 
 (defface my-pl-segment0-active
-  '((t (:foreground "black" :weight normal :background "#669966")))
+  ;; blue
+  ;; '((t (:foreground "black" :weight normal :background "#669966")))
+  '((t (:foreground "#E5E3F5" :weight normal :background "#303F9F")))
   "Powerline first segment active face.")
 (defface my-pl-segment0-inactive
-  '((t (:foreground "#CEBFF3" :background "#3A2E58")))
+  ;; '((t (:foreground "#CEBFF3" :background "#3A2E58")))
+  '((t (:foreground "#CEBFF3" :background "#6A1B9A")))
   "Powerline first segment inactive face.")
 
 (defface my-pl-segment1-active
-  '((t (:foreground "black" :weight normal :background "#996666")))
+  ;; red
+  ;; '((t (:foreground "black" :weight normal :background "#996666")))
+  '((t (:foreground "#E5E3F5" :weight normal :background "#880E4F")))
   "Powerline first segment active face.")
 (defface my-pl-segment1-inactive
-  '((t (:foreground "#CEBFF3" :background "#3A2E58")))
+  ; '((t (:foreground "#CEBFF3" :background "#3A2E58")))
+  '((t (:foreground "#CEBFF3" :background "#6A1B9A")))
   "Powerline first segment inactive face.")
 
 (defface my-pl-segment2-active
-  '((t (:foreground "#E5E3F5" :weight normal :background "#6666aa")))
+  ;; green
+  ;; '((t (:foreground "#E5E3F5" :weight normal :background "#6666aa")))
+  '((t (:foreground "#E5E3F5" :weight normal :background "#2E7D32")))
   "Powerline second segment active face.")
 (defface my-pl-segment2-inactive
-  '((t (:foreground "#CEBFF3" :weight normal :background "#3A2E58")))
+  ;; '((t (:foreground "#CEBFF3" :weight normal :background "#3A2E58")))
+  '((t (:foreground "#CEBFF3" :weight normal :background "#6A1B9A")))
   "Powerline second segment inactive face.")
 
 (defface my-pl-segment3-active
-  '((t (:foreground "#CEBFF3" :background "#3A2E58")))
+  ;; '((t (:foreground "#CEBFF3" :background "#3A2E58")))
+  '((t (:foreground "#CEBFF3" :background "#6A1B9A")))
   "Powerline third segment active face.")
 (defface my-pl-segment3-inactive
-  '((t (:foreground "#CEBFF3" :background "#3A2E58")))
+  ;; '((t (:foreground "#CEBFF3" :background "#3A2E58")))
+  '((t (:foreground "#CEBFF3" :background "#6A1B9A")))
   "Powerline third segment inactive face.")
 
 (defcustom powerline-display-buffer-size t
@@ -100,8 +111,8 @@
                                      (funcall separator-right seg2 seg1)
                                      (powerline-raw " " seg1)
                                      (powerline-raw "%6p" seg1 'r)
-				     (when powerline-display-hud
-				       (powerline-hud seg1 seg3))
+                                     (when powerline-display-hud
+                                       (powerline-hud seg1 seg3))
 				     (powerline-raw " " seg1)
 				     )))
 		     (concat (powerline-render lhs)
