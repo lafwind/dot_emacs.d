@@ -495,8 +495,16 @@
 (define-key evil-normal-state-map (kbd "ge") 'end-of-line)
 (define-key evil-visual-state-map (kbd "ge") (kbd "$h"))
 (define-key evil-normal-state-map (kbd "gb") 'beginning-of-line)
+(define-key evil-normal-state-map (kbd "ga") (kbd "^"))
 
-					; (global-set-key [escape] 'keyboard-quit)
+(define-key evil-normal-state-map (kbd ",vs") (kbd ":vs<tab>"))
+(define-key evil-normal-state-map (kbd ",hs") (kbd ":sp<tab>"))
+(define-key evil-normal-state-map (kbd "C-h") (kbd "C-w h"))
+(define-key evil-normal-state-map (kbd "C-j") (kbd "C-w j"))
+(define-key evil-normal-state-map (kbd "C-k") (kbd "C-w k"))
+(define-key evil-normal-state-map (kbd "C-l") (kbd "C-w l"))
+
+;; (global-set-key [escape] 'keyboard-quit)
 (global-set-key [escape] 'keyboard-escape-quit)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -533,8 +541,8 @@
   "wj" 'windmove-down
   "wl" 'windmove-right
   "wh" 'windmove-left
-  "vs" 'split-window-right
-  "hs" 'split-window-below
+  ;; "vs" 'split-window-right
+  ;; "hs" 'split-window-below
   "wm" 'maximize-window
   "ww" 'delete-other-windows
   "wx" 'delete-window
