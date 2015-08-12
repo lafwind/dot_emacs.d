@@ -504,6 +504,9 @@
 (define-key evil-normal-state-map (kbd "C-k") (kbd "C-w k"))
 (define-key evil-normal-state-map (kbd "C-l") (kbd "C-w l"))
 
+(define-key evil-insert-state-map (kbd "C-d") 'delete-backward-char)
+(define-key evil-insert-state-map (kbd "M-d") 'backward-kill-word)
+
 ;; (global-set-key [escape] 'keyboard-quit)
 (global-set-key [escape] 'keyboard-escape-quit)
 
