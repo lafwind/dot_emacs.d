@@ -84,7 +84,7 @@
 (set-face-attribute 'vertical-border
 		    nil
 		    :foreground "#1e1e1e")
-					; :foreground "#232830") ;; for spacegray
+;; :foreground "#232830") ;; for spacegray
 
 ;; 显示行列号
 (setq column-number-mode t)
@@ -106,20 +106,24 @@
 ;; 显示行号
 (global-linum-mode t)
 
-(fset 'yes-or-no-p 'y-or-n-p)      ;Treat 'y' as yes, 'n' as no.
+;; Treat 'y' as yes, 'n' as no.
+(fset 'yes-or-no-p 'y-or-n-p)
 
-(setq default-directory "~/projects/")  ;寻找文件的默认路径
+;; 寻找文件的默认路径
+(setq default-directory "~/projects/")
 
-					; (setq inhibit-splash-screen t)
-					; (setq inhibit-startup-screen t)
+;; (setq inhibit-splash-screen t)
+;; (setq inhibit-startup-screen t)
 ;;(setq inhibit-startup-message t)
-					; (setq inhibit-startup-message t)
+;; (setq inhibit-startup-message t)
 
 (setq inhibit-startup-message t)
 (setq initial-scratch-message "")
 
 (setq make-backup-files nil)
-(setq auto-save-default nil)  ;不生成#file_name#临时文件
+
+;;不生成#file_name#临时文件
+(setq auto-save-default nil)
 
 ;; (global-visual-line-mode 1)
 
@@ -133,17 +137,17 @@
 (fringe-mode 0)
 ;; (setq visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow))
 ;; (global-visual-line-mode nil)
-					; (setq-default right-fringe-width 0)
-					; (setq-default left-fringe-width 0)
+;; (setq-default right-fringe-width 0)
+;; (setq-default left-fringe-width 0)
 ;; (add-to-list 'default-frame-alist '(left-fringe . 0))
 ;; (add-to-list 'default-frame-alist '(right-fringe . 1))
 ;; (set-face-attribute 'fringe nil :background "#232830")
 
 ;; (fringe-mode '(8 . 1))
-					; (defun hide-fringes ()
-					;   (set-face-attribute 'left-fringe nil :background "#232830"))
+;; (defun hide-fringes ()
+;;   (set-face-attribute 'left-fringe nil :background "#232830"))
 ;; ;;
-					; (add-hook 'neotree-mode-hook 'hide-fringes)
+;; (add-hook 'neotree-mode-hook 'hide-fringes)
 
 ;; font
 ;; (set-default-font "Monaco-11")
@@ -163,11 +167,11 @@
      (define-key company-active-map [S-tab] 'company-select-previous)
      (define-key company-active-map [tab] 'company-select-next)))
 (setq company-selection-wrap-around t)
-					;
-					; ;;; UI
+
+;;; UI
 (require 'color)
 
-					;(bg (face-attribute 'default :background))
+;; (bg (face-attribute 'default :background))
 (let ((bg (face-attribute 'default :background)))
   (custom-set-faces
    `(company-tooltip ((t (:inherit default :background ,(color-lighten-name bg 2)))))
@@ -217,7 +221,7 @@
 (global-set-key [f8] 'neotree-toggle)
 (setq neo-theme 'ascii) ; 'classic, 'nerd, 'ascii, 'arrow
 (setq neo-window-width 39)
-					; (setq neo-smart-open t)
+;; (setq neo-smart-open t)
 
 (setq projectile-switch-project-action 'neotree-projectile-action)
 
@@ -231,7 +235,7 @@
 	  (neotree-dir project-dir)
 	  (neotree-find file-name))
       (neotree-find))))
-					; (message "Could not find git project root."))))
+;; (message "Could not find git project root."))))
 
 (evil-leader/set-key
   "nn" 'neotree-project-dir
@@ -273,7 +277,7 @@
 
 (defun change-neotree-background-color ()
   (interactive)
-					; (setq buffer-face-mode-face `(:background "#232830")) ;; for spacegray
+  ;; (setq buffer-face-mode-face `(:background "#232830")) ;; for spacegray
   (setq buffer-face-mode-face `(:background "#1e1e1e"))
   (buffer-face-mode 1))
 
@@ -295,9 +299,9 @@
 
 (require 'helm)
 (require 'helm-config)
-					; (require 'helm-themes)
-					;(helm-mode 1)
-					;(setq enable-recursive-minibuffers t)
+;; (require 'helm-themes)
+;; (helm-mode 1)
+;; (setq enable-recursive-minibuffers t)
 
 (setq helm-buffers-fuzzy-matching t)
 (setq helm-imenu-fuzzy-matching t)
@@ -315,17 +319,17 @@
   "hb" 'helm-buffers-list
   )
 
-					;(global-set-key (kbd "M-x") 'helm-M-x)
-					;(global-set-key (kbd "M-x") 'helm-M-x)
-					;(global-set-key (kbd "C-x C-f") 'helm-find-files)
-					; (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
-					; (global-set-key (kbd "C-x C-m") 'helm-imenu)
+;; (global-set-key (kbd "M-x") 'helm-M-x)
+;; (global-set-key (kbd "M-x") 'helm-M-x)
+;; (global-set-key (kbd "C-x C-f") 'helm-find-files)
+;; (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
+;; (global-set-key (kbd "C-x C-m") 'helm-imenu)
 
-					; (define-key helm-map (kbd "<tab>") nil)
+;; (define-key helm-map (kbd "<tab>") nil)
 (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
 (define-key helm-map (kbd "C-z") 'helm-select-action)
 
-					;(add-to-list 'helm-completing-read-handlers-alist '(find-file . ido))
+;;(add-to-list 'helm-completing-read-handlers-alist '(find-file . ido))
 
 ;;; helm UI
 (setq helm-display-header-line nil) ;; t by default
@@ -338,8 +342,8 @@
 ;;; projectile
 (projectile-global-mode)
 (projectile-mode t)
-					; (setq projectile-completion-system 'helm)
-					; (helm-projectile-on)
+;; (setq projectile-completion-system 'helm)
+;; (helm-projectile-on)
 
 ;; Show projectile lists by most recently active
 (setq projectile-sort-order (quote recently-active))
@@ -372,9 +376,9 @@
 	    (define-key ido-completion-map (kbd "C-p") 'ido-prev-match)
 	    (define-key ido-completion-map (kbd "C-j") 'ido-next-match)
 	    (define-key ido-completion-map (kbd "C-k") 'ido-prev-match)))
-					; (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
-					; (define-key ido-completion-map (kbd "C-p") 'ido-prev-match)
-					;(define-key helm-map (kbd "C-z") 'helm-select-action)
+;; (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
+;; (define-key ido-completion-map (kbd "C-p") 'ido-prev-match)
+;; (define-key helm-map (kbd "C-z") 'helm-select-action)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; flx-ido
