@@ -441,7 +441,7 @@
 
 (require 'find-file-in-project)
 (autoload 'ivy-read "ivy")
-					; (setq projectile-completion-system 'ivy)
+;; (setq projectile-completion-system 'ivy)
 
 (evil-leader/set-key
   "fp" 'find-file-in-project
@@ -451,9 +451,11 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; smex
-(require 'smex) ; Not needed if you use package.el
-(smex-initialize) ; Can be omitted. This might cause a (minimal) delay
-					; when Smex is auto-initialized on its first run.
+;; Not needed if you use package.el
+(require 'smex)
+;; Can be omitted. This might cause a (minimal) delay
+;; when Smex is auto-initialized on its first run.
+(smex-initialize)
 
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
@@ -464,20 +466,20 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; smartparens
 ;; global
-					; (require 'smartparens-config)
-					; ; (smartparens-global-mode t)
+;; (require 'smartparens-config)
+;; (smartparens-global-mode t)
 
 ;; highlights matching pairs
-					; (show-smartparens-global-mode t)
+;; (show-smartparens-global-mode t)
 
-					; (set-face-attribute 'sp-pair-overlay-face nil :background "black")
+;; (set-face-attribute 'sp-pair-overlay-face nil :background "black")
 
 
 (show-paren-mode t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; highlight-parentheses
-					; (require 'highlight-parentheses)
+;; (require 'highlight-parentheses)
 
 ;;; evil mode
 (require 'evil)
@@ -587,7 +589,7 @@
 
 ;;; evil-nerd-commenter
 
-					; (evilnc-default-hotkeys)
+;; (evilnc-default-hotkeys)
 
 ;; evil-nerd-comment:  Emacs key bindings
 (global-set-key (kbd "M-;") 'evilnc-comment-or-uncomment-lines)
@@ -623,7 +625,7 @@
 
 ;;;
 (require 'rinari)
-					; (global-rinari-mode t)
+;; (global-rinari-mode t)
 
 ;;; projectile-rails
 (add-hook 'projectile-mode-hook 'projectile-rails-on)
@@ -777,23 +779,19 @@
   "er" 'er/expand-region
   )
 
-
-
-;; spacygray
-
 ;; powerline
 (require 'powerline)
 (require 'powerline-evil)
 ;; (display-time-mode t)
 (require 'powerline-my-theme)
 (powerline-my-theme)
-					; (powerline-default-theme)
+;; (powerline-default-theme)
 
 (set-face-attribute 'mode-line nil :box nil)
 (set-face-attribute 'mode-line-inactive nil :box nil)
 
 ;;; Longline
-					; (require 'longlines)
+;; (require 'longlines)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; indent guide
