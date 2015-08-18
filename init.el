@@ -5,18 +5,19 @@
 ;;; code:
 ;;; Add the original Emacs Lisp Package Archive
 (add-to-list 'package-archives
-	     '("elpa" . "http://tromey.com/elpa/"))
+             '("elpa" . "http://tromey.com/elpa/"))
 
 ;;; Add the user-contributed repository
 (add-to-list 'package-archives
-	     '("marmalade" . "http://marmalade-repo.org/packages/"))
+             '("marmalade" . "http://marmalade-repo.org/packages/"))
 
 ;; melpa
 (add-to-list 'package-archives
-	     '("melpa" . "http://melpa.org/packages/") t)
+             '("melpa" . "http://melpa.org/packages/") t)
 
 (add-to-list 'package-archives
-	     '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+             '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+
 
 (when (< emacs-major-version 24)
   ;; For important compatibility libraries like cl-lib
@@ -71,7 +72,7 @@
 (custom-set-faces
  ;; '(col-highlight ((t (:background "#3F4A5A"))))
  ;; '(hl-line ((t (:background "#323A43"))))
-					;'(hl-line ((t (:background "#999999"))))
+                                        ;'(hl-line ((t (:background "#999999"))))
  ;; '(lazy-highlight ((t (:background "#aa8888" :foreground "#ffffff"))))
  )
 
@@ -82,8 +83,8 @@
 (set-mouse-color "white")
 
 (set-face-attribute 'vertical-border
-		    nil
-		    :foreground "#1e1e1e")
+                    nil
+                    :foreground "#1e1e1e")
 ;; :foreground "#232830") ;; for spacegray
 
 ;; 显示行列号
@@ -175,7 +176,7 @@
 (let ((bg (face-attribute 'default :background)))
   (custom-set-faces
    `(company-tooltip ((t (:inherit default :background ,(color-lighten-name bg 2)))))
-					; `(company-tooltip ((t (:inherit default :background "black"))))
+                                        ; `(company-tooltip ((t (:inherit default :background "black"))))
    `(company-scrollbar-bg ((t (:background ,(color-lighten-name bg 10)))))
    `(company-scrollbar-fg ((t (:background ,(color-lighten-name bg 5)))))
    `(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
@@ -229,11 +230,11 @@
   "Open NeoTree using the git root."
   (interactive)
   (let ((project-dir (ffip-project-root))
-	(file-name (buffer-file-name)))
+        (file-name (buffer-file-name)))
     (if project-dir
-	(progn
-	  (neotree-dir project-dir)
-	  (neotree-find file-name))
+        (progn
+          (neotree-dir project-dir)
+          (neotree-find file-name))
       (neotree-find))))
 ;; (message "Could not find git project root."))))
 
@@ -242,19 +243,19 @@
   )
 
 (add-hook 'neotree-mode-hook
-	  (lambda ()
-	    (define-key evil-normal-state-local-map (kbd "o") 'neotree-enter)
-	    (define-key evil-normal-state-local-map (kbd "r") 'neotree-rename-node)
-	    (define-key evil-normal-state-local-map (kbd "d") 'neotree-delete-node)
-	    (define-key evil-normal-state-local-map (kbd "a") 'neotree-create-node)
-	    (define-key evil-normal-state-local-map (kbd "u") 'neotree-refresh)
-	    (define-key evil-normal-state-local-map (kbd "c") 'neotree-change-root)
-	    (define-key evil-normal-state-local-map (kbd "p") 'neotree-select-up-node)
-	    (define-key evil-normal-state-local-map (kbd "s") 'neotree-select-next-sibling-node)
-	    (define-key evil-normal-state-local-map (kbd "S") 'neotree-select-previous-sibling-node)
-	    (define-key evil-normal-state-local-map (kbd "th") 'neotree-hidden-file-toggle)
-	    (define-key evil-normal-state-local-map (kbd "q") 'neotree-hide)
-	    (define-key evil-normal-state-local-map (kbd "RET") 'neotree-enter)))
+          (lambda ()
+            (define-key evil-normal-state-local-map (kbd "o") 'neotree-enter)
+            (define-key evil-normal-state-local-map (kbd "r") 'neotree-rename-node)
+            (define-key evil-normal-state-local-map (kbd "d") 'neotree-delete-node)
+            (define-key evil-normal-state-local-map (kbd "a") 'neotree-create-node)
+            (define-key evil-normal-state-local-map (kbd "u") 'neotree-refresh)
+            (define-key evil-normal-state-local-map (kbd "c") 'neotree-change-root)
+            (define-key evil-normal-state-local-map (kbd "p") 'neotree-select-up-node)
+            (define-key evil-normal-state-local-map (kbd "s") 'neotree-select-next-sibling-node)
+            (define-key evil-normal-state-local-map (kbd "S") 'neotree-select-previous-sibling-node)
+            (define-key evil-normal-state-local-map (kbd "th") 'neotree-hidden-file-toggle)
+            (define-key evil-normal-state-local-map (kbd "q") 'neotree-hide)
+            (define-key evil-normal-state-local-map (kbd "RET") 'neotree-enter)))
 
 
 
@@ -346,6 +347,7 @@
 ;; (helm-projectile-on)
 
 ;; Show projectile lists by most recently active
+(setq projectile-enable-caching t)
 (setq projectile-sort-order (quote recently-active))
 
 (evil-leader/set-key
@@ -371,11 +373,11 @@
 (setq ido-auto-merge-work-directories-length -1)
 
 (add-hook 'ido-setup-hook
-	  (lambda ()
-	    (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
-	    (define-key ido-completion-map (kbd "C-p") 'ido-prev-match)
-	    (define-key ido-completion-map (kbd "C-j") 'ido-next-match)
-	    (define-key ido-completion-map (kbd "C-k") 'ido-prev-match)))
+          (lambda ()
+            (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
+            (define-key ido-completion-map (kbd "C-p") 'ido-prev-match)
+            (define-key ido-completion-map (kbd "C-j") 'ido-next-match)
+            (define-key ido-completion-map (kbd "C-k") 'ido-prev-match)))
 ;; (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
 ;; (define-key ido-completion-map (kbd "C-p") 'ido-prev-match)
 ;; (define-key helm-map (kbd "C-z") 'helm-select-action)
@@ -400,13 +402,13 @@
 (setq ido-vertical-show-count t)
 (setq ido-use-faces t)
 (set-face-attribute 'ido-vertical-first-match-face nil
-		    :background nil
-		    :foreground "orange")
+                    :background nil
+                    :foreground "orange")
 (set-face-attribute 'ido-vertical-only-match-face nil
-		    :background nil
-		    :foreground nil)
+                    :background nil
+                    :foreground nil)
 (set-face-attribute 'ido-vertical-match-face nil
-		    :foreground nil)
+                    :foreground nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; ivy mode
@@ -423,12 +425,12 @@
   "Find file in the current Git repository."
   (interactive)
   (let* ((default-directory (locate-dominating-file
-			     default-directory ".git"))
-	 (cands (split-string
-		 (shell-command-to-string
-		  "git ls-files --full-name --")
-		 "\n"))
-	 (file (ivy-read "Find file: " cands)))
+                             default-directory ".git"))
+         (cands (split-string
+                 (shell-command-to-string
+                  "git ls-files --full-name --")
+                 "\n"))
+         (file (ivy-read "Find file: " cands)))
     (when file
       (find-file file))))
 (global-set-key (kbd "C-c f") 'couns-git)
@@ -517,9 +519,19 @@
 (global-set-key [escape] 'keyboard-escape-quit)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; For easy motion
+(evilem-default-keybindings "SPC")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; For surround
+
+(require 'evil-surround)
+(global-evil-surround-mode 1)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; For shell
 (add-hook 'term-mode-hook (lambda()
-			    (yas-minor-mode -1)))
+                            (yas-minor-mode -1)))
 
 (setq shell-command-switch "-ic")
 
@@ -726,9 +738,9 @@
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (setq js2-mode-hook
       '(lambda () (progn
-		    (set-variable 'indent-tabs-mode nil)
-		    (set-variable 'tab-width 4)
-		    )))
+                    (set-variable 'indent-tabs-mode nil)
+                    (set-variable 'tab-width 4)
+                    )))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; scss-mode
@@ -739,7 +751,6 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; haml
-
 (require 'haml-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
