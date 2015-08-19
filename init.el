@@ -91,9 +91,11 @@
 (setq column-number-mode t)
 (setq line-number-mode t)
 (column-number-mode t)     ;在模式行上显示行号列号
-(setq linum-format "  %d  ")
+(setq linum-format "  %d   ")
 ;; (setq linum-format "%5d \u2502 ")
 ;; (custom-set-faces '(linum ((t (:foreground "pink" :background "#363a4a" :box nil)))) )
+
+;; (require 'linum-relative)
 
 
 ;; (custom-set-faces '(linum ((t (:foreground "pink")))) )
