@@ -507,6 +507,9 @@
 (define-key evil-normal-state-map (kbd "gb") 'beginning-of-line)
 (define-key evil-normal-state-map (kbd "ga") (kbd "^"))
 
+(define-key evil-normal-state-map (kbd "gp") (kbd "%"))
+(define-key evil-visual-state-map (kbd "gp") (kbd "%"))
+
 (define-key evil-normal-state-map (kbd ",vs") (kbd ":vs<tab>"))
 (define-key evil-normal-state-map (kbd ",hs") (kbd ":sp<tab>"))
 (define-key evil-normal-state-map (kbd "C-h") (kbd "C-w h"))
