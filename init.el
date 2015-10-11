@@ -735,6 +735,7 @@
 (add-hook 'web-mode-hook  'my-web-mode-hook)
 (setq web-mode-enable-css-colorization t)
 
+(set-face-attribute 'web-mode-html-tag-face nil :foreground "#E55086")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Emmet
