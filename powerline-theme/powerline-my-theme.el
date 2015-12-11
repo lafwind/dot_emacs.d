@@ -13,7 +13,8 @@
   "Powerline first segment active face.")
 (defface my-pl-segment0-inactive
   ;; '((t (:foreground "#CEBFF3" :background "#3A2E58")))
-  '((t (:foreground "#CEBFF3" :background "#6A1B9A")))
+  ;; '((t (:foreground "#CEBFF3" :background "#6A1B9A")))
+  '((t (:foreground "#CEBFF3" :background "#232323")))
   "Powerline first segment inactive face.")
 
 (defface my-pl-segment1-active
@@ -23,26 +24,34 @@
   "Powerline first segment active face.")
 (defface my-pl-segment1-inactive
   ; '((t (:foreground "#CEBFF3" :background "#3A2E58")))
-  '((t (:foreground "#CEBFF3" :background "#6A1B9A")))
+  ;; '((t (:foreground "#CEBFF3" :background "#6A1B9A")))
+  '((t (:foreground "#CEBFF3" :background "#232323")))
   "Powerline first segment inactive face.")
 
 (defface my-pl-segment2-active
   ;; green
   ;; '((t (:foreground "#E5E3F5" :weight normal :background "#6666aa")))
   '((t (:foreground "#E5E3F5" :weight normal :background "#2E7D32")))
+
   "Powerline second segment active face.")
 (defface my-pl-segment2-inactive
   ;; '((t (:foreground "#CEBFF3" :weight normal :background "#3A2E58")))
-  '((t (:foreground "#CEBFF3" :weight normal :background "#6A1B9A")))
+  ;; '((t (:foreground "#CEBFF3" :weight normal :background "#6A1B9A")))
+  '((t (:foreground "#CEBFF3" :background "#232323")))
   "Powerline second segment inactive face.")
 
 (defface my-pl-segment3-active
   ;; '((t (:foreground "#CEBFF3" :background "#3A2E58")))
-  '((t (:foreground "#CEBFF3" :background "#6A1B9A")))
+
+  ;; purple
+  ;; '((t (:foreground "#CEBFF3" :background "#6A1B9A")))
+  '((t (:foreground "#CEBFF3" :background "#232323")))
+
   "Powerline third segment active face.")
 (defface my-pl-segment3-inactive
   ;; '((t (:foreground "#CEBFF3" :background "#3A2E58")))
-  '((t (:foreground "#CEBFF3" :background "#6A1B9A")))
+  ;; '((t (:foreground "#CEBFF3" :background "#6A1B9A")))
+  '((t (:foreground "#CEBFF3" :background "#232323")))
   "Powerline third segment inactive face.")
 
 (defcustom powerline-display-buffer-size t

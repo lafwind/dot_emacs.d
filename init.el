@@ -45,8 +45,8 @@
 ;; 主题
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 
-;; (load-theme 'material-one t)
-(load-theme 'spacegray t)
+(load-theme 'material-one t)
+;; (load-theme 'spacegray t)
 ;; (load-theme 'atom-one-dark t)
 ;; (load-theme 'flatland t)
 ;;(load-theme 'eclipse t)
@@ -84,8 +84,8 @@
 
 (set-face-attribute 'vertical-border
                     nil
-		    :foreground "#232830") ;; for spacegray
-                    ;; :foreground "#1e1e1e") ;; for material one
+		    ;; :foreground "#232830") ;; for spacegray
+                    :foreground "#1e1e1e") ;; for material one
 
 ;; 显示行列号
 (setq column-number-mode t)
@@ -264,24 +264,24 @@
 ;;; neotree UI
 
 ;;; for spacegray
-(custom-set-faces
- '(neo-dir-link-face ((t (:foreground "#515A66"))))
- ; '(neo-file-link-face ((t (:foreground "#A8B1B8"))))
- '(neo-file-link-face ((t (:foreground "#919AA6"))))
- '(neo-expand-btn-face ((t (:foreground "#515A66"))))
- '(neo-banner-face ((t (:foreground "#515A66"))))
- '(neo-header-face ((t (:foreground "#515A66"))))
- '(neo-button-face ((t (:foreground "#515A66"))))
- '(neo-root-dir-face ((t (:foreground "EEA2AD"))))
-)
+;; (custom-set-faces
+;;  '(neo-dir-link-face ((t (:foreground "#515A66"))))
+;;  ; '(neo-file-link-face ((t (:foreground "#A8B1B8"))))
+;;  '(neo-file-link-face ((t (:foreground "#919AA6"))))
+;;  '(neo-expand-btn-face ((t (:foreground "#515A66"))))
+;;  '(neo-banner-face ((t (:foreground "#515A66"))))
+;;  '(neo-header-face ((t (:foreground "#515A66"))))
+;;  '(neo-button-face ((t (:foreground "#515A66"))))
+;;  '(neo-root-dir-face ((t (:foreground "EEA2AD"))))
+;; )
 
 (add-hook 'neotree-mode-hook 'change-neotree-background-color)
 (add-hook 'neotree-mode-hook 'neotree-set-margins)
 
 (defun change-neotree-background-color ()
   (interactive)
-  (setq buffer-face-mode-face `(:background "#232830")) ;; for spacegray
-  ;; (setq buffer-face-mode-face `(:background "#1e1e1e")) ;; for material one
+  ;; (setq buffer-face-mode-face `(:background "#232830")) ;; for spacegray
+  (setq buffer-face-mode-face `(:background "#1e1e1e")) ;; for material one
   (buffer-face-mode 1))
 
 (defun neotree-set-margins ()
@@ -355,8 +355,12 @@
 (evil-leader/set-key
   "pp" 'projectile-switch-project
   "pf" 'projectile-find-file
+  "pc" 'projectile-invalidate-cache
   "pr" 'projectile-recentf
+  "pb" 'projectile-display-buffer
   )
+
+(global-set-key (kbd "C-'") 'projectile-find-file)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -775,6 +779,10 @@
 ;;; haml
 (require 'haml-mode)
 
+(setq haml-mode-hook
+      '(lambda () (progn
+                    (set-variable 'tab-width 2)
+                    )))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; scheme
 ;; geiser
