@@ -7,7 +7,7 @@
 (add-to-list 'package-archives
              '("elpa" . "http://tromey.com/elpa/"))
 
-;;; Add the user-contributed repository
+;;; add the user-contributed repository
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/"))
 
@@ -521,8 +521,14 @@
 (define-key evil-normal-state-map (kbd "C-k") (kbd "C-w k"))
 (define-key evil-normal-state-map (kbd "C-l") (kbd "C-w l"))
 
+;; (define-key evil-normal-state-map (kbd "w") 'evil-window-top)
+;; (define-key evil-normal-state-map (kbd "b") 'evil-window-bottom)
+;; (define-key evil-normal-state-map (kbd "H") 'evil-backward-word-begin)
+;; (define-key evil-normal-state-map (kbd "L") 'evil-forward-word-begin)
+
 (define-key evil-insert-state-map (kbd "C-d") 'delete-backward-char)
 (define-key evil-insert-state-map (kbd "M-d") 'backward-kill-word)
+
 
 ;; (global-set-key [escape] 'keyboard-quit)
 (global-set-key [escape] 'keyboard-escape-quit)
@@ -707,12 +713,6 @@
   "rirb" 'inf-ruby
   )
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Elixir alchemist
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(setq alchemist-execute-command "/usr/local/bin/elixir")
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; web-mode
@@ -783,6 +783,69 @@
       '(lambda () (progn
                     (set-variable 'tab-width 2)
                     )))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Elixir alchemist
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; (setq alchemist-execute-command "/usr/local/bin/elixir")
+
+(add-hook 'elixir-mode-hook 'alchemist-mode)
+
+(defun my-eex-mode ()
+  "Hooks for eex file."
+  (web-mode)
+  (alchemist-mode)
+  )
+
+(add-to-list 'auto-mode-alist '("\\.eex\\'" . my-eex-mode))
+
+(add-hook 'alchemist-mode-hook
+          (lambda ()
+            (evil-leader/set-key
+              "ecb" 'alchemist-compile-this-buffer
+              "ecf" 'alchemist-compile-file
+              "eeb" 'alchemist-execute-this-buffer
+              "eef" 'alchemist-execute-file
+              "eh" 'alchemist-help-search-at-point
+              "eH" 'alchemist-help
+
+              "egd" 'alchemist-goto-definition-at-point
+              "egb" 'alchemist-goto-jump-back
+
+              ;; iex
+              "eip" 'alchemist-iex-project-run
+              "eil" 'alchemist-iex-send-current-line
+              "eir" 'alchemist-iex-send-region
+              "eib" 'alchemist-iex-compile-this-buffer
+
+              ;;eval
+              "evl" 'alchemist-eval-current-line
+              "evL" 'alchemist-eval-print-current-line
+              "evr" 'alchemist-eval-region
+              "evR" 'alchemist-eval-print-region
+
+              "etf" 'alchemist-project-toggle-file-and-tests
+              "efX" 'alchemist-project-run-tests-for-current-file
+              "efT" 'alchemist-project-find-test
+              "efL" 'alchemist-project-find-lib
+
+              ;; phoenix
+              "efw" 'alchemist-phoenix-find-web
+              "efc" 'alchemist-phoenix-find-controllers
+              "efl" 'alchemist-phoenix-find-channels
+              "eft" 'alchemist-phoenix-find-templates
+              "efm" 'alchemist-phoenix-find-models
+              "efv" 'alchemist-phoenix-find-views
+              "efs" 'alchemist-phoenix-find-static
+              "efr" 'alchemist-phoenix-router
+              "efR" 'alchemist-phoenix-routes
+              )))
+
+(evil-leader/set-key
+  "eiex" 'alchemist-iex-run
+  )
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; scheme
 ;; geiser
