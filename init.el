@@ -514,8 +514,8 @@
 (define-key evil-normal-state-map (kbd "gp") (kbd "%"))
 (define-key evil-visual-state-map (kbd "gp") (kbd "%"))
 
-(define-key evil-normal-state-map (kbd ",vs") (kbd ":vs<tab>"))
-(define-key evil-normal-state-map (kbd ",hs") (kbd ":sp<tab>"))
+(define-key evil-normal-state-map (kbd "SPC vs") (kbd ":vs<tab>"))
+(define-key evil-normal-state-map (kbd "SPC hs") (kbd ":sp<tab>"))
 (define-key evil-normal-state-map (kbd "C-h") (kbd "C-w h"))
 (define-key evil-normal-state-map (kbd "C-j") (kbd "C-w j"))
 (define-key evil-normal-state-map (kbd "C-k") (kbd "C-w k"))
@@ -535,7 +535,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; For easy motion
-(evilem-default-keybindings "SPC")
+(evilem-default-keybindings ",")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; For surround
@@ -567,7 +567,8 @@
 ;;; evil-leader
 (require 'evil-leader)
 (global-evil-leader-mode)
-(evil-leader/set-leader ",")
+;; (evil-leader/set-leader ",")
+(evil-leader/set-leader "SPC")
 
 ;;; For all
 (evil-leader/set-key
@@ -586,15 +587,15 @@
   "xo" 'pop-global-mark
 
   ;; Start with M-
-  ",x" 'smex
-  ",md" 'make-directory
+  "SPC x" 'smex
+  "SPC md" 'make-directory
 
   ;; Start with C-
   "xc" 'save-buffers-kill-emacs
   "xk" 'kill-buffer
 
   ;; Mode
-  ",,w" 'web-mode
+  "SPC SPC w" 'web-mode
   )
 
 ;;; ido
@@ -790,6 +791,7 @@
 
 ;; (setq alchemist-execute-command "/usr/local/bin/elixir")
 
+
 (add-hook 'elixir-mode-hook 'alchemist-mode)
 
 (defun my-eex-mode ()
@@ -930,7 +932,11 @@
 (indent-guide-global-mode)
 (setq indent-guide-recursive t)
 
+;;; dired mode
 
+(add-hook 'dired-mode-hook
+          (lambda ()
+            (define-key evil-normal-state-local-map (kbd "C-e C-e") 'wdired-change-to-wdired-mode)))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; customise
 (setq custom-file "~/.emacs.d/custom.el")
