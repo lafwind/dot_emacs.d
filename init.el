@@ -25,10 +25,18 @@
 
 (package-initialize) ;; You might already have this line
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defun open-my-init-file ()
+  (interactive)
+  (find-file "~/.emacs.d/init.el"))
+
+(global-set-key (kbd "<f2>") 'open-my-init-file)
+
 ;; hide bar
 (tool-bar-mode 0)
 (menu-bar-mode 0)
 (scroll-bar-mode 0)
+(electric-indent-mode -1)
 
 (setq max-mini-window-height 1.00)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
