@@ -12,11 +12,14 @@
              '("marmalade" . "http://marmalade-repo.org/packages/"))
 
 ;; melpa
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.org/packages/") t)
+;; (add-to-list 'package-archives
+;;              '("melpa" . "https://melpa.org/packages/"))
 
 (add-to-list 'package-archives
-             '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+             '("melpa" . "https://melpa.org/packages/") t)
+
+(add-to-list 'package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
 
 (when (< emacs-major-version 24)
@@ -24,6 +27,7 @@
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 
 (package-initialize) ;; You might already have this line
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun open-my-init-file ()
@@ -36,7 +40,7 @@
 (tool-bar-mode 0)
 (menu-bar-mode 0)
 (scroll-bar-mode 0)
-(electric-indent-mode -1)
+;; (electric-indent-mode -1)
 
 (setq max-mini-window-height 1.00)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -933,6 +937,23 @@
 
 ;;; Longline
 ;; (require 'longlines)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; aggressive-indent-mode
+
+(global-aggressive-indent-mode 1)
+
+;; (add-hook 'ruby-mode-hook #'aggressive-indent-mode)
+;; (add-hook 'elixir-mode-hook #'aggressive-indent-mode)
+;; (add-hook 'racket-mode-hook #'aggressive-indent-mode)
+;; (add-hook 'scheme-mode-hook #'aggressive-indent-mode)
+;; (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
+;; (add-hook 'haskell-mode-hook #'aggressive-indent-mode)
+;; (add-hook 'js-mode-hook #'aggressive-indent-mode)
+;; (add-hook 'html-mode-hook #'aggressive-indent-mode)
+;; (add-hook 'haml-mode-hook #'aggressive-indent-mode)
+;; (add-hook 'css-mode-hook #'aggressive-indent-mode)
+;; (add-hook 'scss-mode-hook #'aggressive-indent-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; indent guide
