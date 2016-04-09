@@ -1,5 +1,5 @@
 ;;; Commentary:
-;;;init.el --- for initialing the emacs
+;;;init.el --- for initialing the Emacs
 (require 'package)
 
 ;;; code:
@@ -12,15 +12,11 @@
              '("marmalade" . "http://marmalade-repo.org/packages/"))
 
 ;; melpa
-;; (add-to-list 'package-archives
-;;              '("melpa" . "https://melpa.org/packages/"))
-
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/") t)
 
 (add-to-list 'package-archives
              '("melpa-stable" . "https://stable.melpa.org/packages/") t)
-
 
 (when (< emacs-major-version 24)
   ;; For important compatibility libraries like cl-lib
