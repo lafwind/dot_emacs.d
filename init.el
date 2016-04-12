@@ -92,7 +92,7 @@
 
 (set-face-attribute 'vertical-border
                     nil
-		    ;; :foreground "#232830") ;; for spacegray
+                    ;; :foreground "#232830") ;; for spacegray
                     :foreground "#1e1e1e") ;; for material one
 
 ;; 显示行列号
@@ -671,52 +671,52 @@
 (add-hook 'projectile-mode-hook 'projectile-rails-on)
 
 (add-hook 'rinari-minor-mode-hook
-	  (lambda ()
-	    (evil-leader/set-key
-	      "rr" 'rinari-rake
-	      "rs" 'rinari-web-server
-	      "rS" 'rinari-web-server-restart
-	      "rk" 'rinari-console
-	      "re" 'rinari-test
-	      "rq" 'rinari-sql
+          (lambda ()
+            (evil-leader/set-key
+              "rr" 'rinari-rake
+              "rs" 'rinari-web-server
+              "rS" 'rinari-web-server-restart
+              "rk" 'rinari-console
+              "re" 'rinari-test
+              "rq" 'rinari-sql
 
-	      "rm" 'rinari-find-model
-	      "rc" 'rinari-find-controller
-	      "rv" 'rinari-find-view
-	      "rn" 'rinari-find-migration
-	      "rh" 'rinari-find-helper
-	      "rt" 'rinari-find-test
-	      "rj" 'rinari-find-javascript
-	      "ry" 'rinari-find-stylesheet
+              "rm" 'rinari-find-model
+              "rc" 'rinari-find-controller
+              "rv" 'rinari-find-view
+              "rn" 'rinari-find-migration
+              "rh" 'rinari-find-helper
+              "rt" 'rinari-find-test
+              "rj" 'rinari-find-javascript
+              "ry" 'rinari-find-stylesheet
 
-	      "rff" 'rinari-find-file-in-project
-	      "rfn" 'rinari-find-configuration
-	      "rfl" 'rinari-find-log
-	      "rfe" 'rinari-find-environment
-	      "rfx" 'rinari-find-fixture
-	      )))
+              "rff" 'rinari-find-file-in-project
+              "rfn" 'rinari-find-configuration
+              "rfl" 'rinari-find-log
+              "rfe" 'rinari-find-environment
+              "rfx" 'rinari-find-fixture
+              )))
 
 (add-hook 'projectile-rails-mode-hook
-	  (lambda ()
-	    (evil-leader/set-key
-	      "rg" 'projectile-rails-generate
-	      "rR" 'projectile-rails-rake
-	      "r!s" 'projectile-rails-sever
-	      "rK" 'projectile-rails-console
+          (lambda ()
+            (evil-leader/set-key
+              "rg" 'projectile-rails-generate
+              "rR" 'projectile-rails-rake
+              "r!s" 'projectile-rails-sever
+              "rK" 'projectile-rails-console
 
-	      "rM" 'projectile-rails-find-model
-	      "rC" 'projectile-rails-find-controller
-	      "rV" 'projectile-rails-find-view
-	      "rN" 'projectile-rails-find-migration
-	      "rH" 'projectile-rails-find-helper
-	      "rT" 'projectile-rails-find-test
+              "rM" 'projectile-rails-find-model
+              "rC" 'projectile-rails-find-controller
+              "rV" 'projectile-rails-find-view
+              "rN" 'projectile-rails-find-migration
+              "rH" 'projectile-rails-find-helper
+              "rT" 'projectile-rails-find-test
 
-	      "rfL" 'projectile-rails-find-log
-	      "rfX" 'projectile-rails-find-fixture
-	      "rfg" 'projectile-rails-goto-gemfile
-	      "rfr" 'projectile-rails-goto-routes
-	      "rfs" 'projectile-rails-goto-schema
-	      )))
+              "rfL" 'projectile-rails-find-log
+              "rfX" 'projectile-rails-find-fixture
+              "rfg" 'projectile-rails-goto-gemfile
+              "rfr" 'projectile-rails-goto-routes
+              "rfs" 'projectile-rails-goto-schema
+              )))
 
 (evil-leader/set-key
   "rirb" 'inf-ruby
@@ -878,11 +878,11 @@
 (add-to-list 'auto-mode-alist '("\\.rkt?\\'" . racket-mode))
 
 (add-hook 'racket-mode-hook
-	  (lambda ()
-	    (evil-leader/set-key
-	      "rr" 'racket-run
-	      "rt" 'racket-test)
-	    ))
+          (lambda ()
+            (evil-leader/set-key
+              "rr" 'racket-run
+              "rt" 'racket-test)
+            ))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Haskell mode
@@ -938,6 +938,8 @@
 ;;; aggressive-indent-mode
 
 (global-aggressive-indent-mode 1)
+
+(setq-default indent-tabs-mode nil)
 
 ;; (add-hook 'ruby-mode-hook #'aggressive-indent-mode)
 ;; (add-hook 'elixir-mode-hook #'aggressive-indent-mode)
