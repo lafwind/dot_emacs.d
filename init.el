@@ -38,11 +38,24 @@
 (scroll-bar-mode 0)
 ;; (electric-indent-mode -1)
 
+;; (prettify-symbols-mode)
+;; (global-prettify-symbols-mode +1)
+;; (add-hook 'emacs-lisp-mode-hook
+;;           (lambda ()
+;;             (push '(">=" . ?≥) prettify-symbols-alist)
+;;             (push '("<=" . ?≤) prettify-symbols-alist)
+;;             ;; (push '("|>" . ?▹) prettify-symbols-alist)
+;;             ;; (push '("->" . ?→) prettify-symbols-alist)
+;;             ;; (push '("=>" . ?⇨) prettify-symbols-alist)
+;;             ))
+
 (setq max-mini-window-height 1.00)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;; don't auto break line
 (set-default 'truncate-lines t)
+
+;; (setq-default tab-width 2)
 
 (setq ring-bell-function 'ignore)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -163,7 +176,46 @@
 ;; font
 ;; (set-default-font "Monaco-11")
 ;; (set-default-font "Source Code Pro-10.9")
-(set-frame-font "CamingoCode 10")
+;; (set-frame-font "CamingoCode 10")
+
+;; (set-frame-font "Monoid HalfLoose 8")
+(set-frame-font "Monoid 8")
+;; (set-frame-font "Monoisome 8")
+
+;; (set-frame-font "FiraCode 10")
+
+;; (when (window-system)
+;;   (set-default-font "Fira Code"))
+
+;; (let ((alist '((33 . ".\\(?:\\(?:==\\|!!\\)\\|[!=]\\)")
+;;                (35 . ".\\(?:###\\|##\\|_(\\|[#(?[_{]\\)")
+;;                (36 . ".\\(?:>\\)")
+;;                (37 . ".\\(?:\\(?:%%\\)\\|%\\)")
+;;                (38 . ".\\(?:\\(?:&&\\)\\|&\\)")
+;;                (42 . ".\\(?:\\(?:\\*\\*/\\)\\|\\(?:\\*[*/]\\)\\|[*/>]\\)")
+;;                (43 . ".\\(?:\\(?:\\+\\+\\)\\|[+>]\\)")
+;;                (45 . ".\\(?:\\(?:-[>-]\\|<<\\|>>\\)\\|[<>}~-]\\)")
+;;                (46 . ".\\(?:\\(?:\\.[.<]\\)\\|[.=-]\\)")
+;;                (47 . ".\\(?:\\(?:\\*\\*\\|//\\|==\\)\\|[*/=>]\\)")
+;;                ;; (48 . ".\\(?:x[a-zA-Z]\\)")
+;;                (58 . ".\\(?:::\\|[:=]\\)")
+;;                (59 . ".\\(?:;;\\|;\\)")
+;;                (60 . ".\\(?:\\(?:!--\\)\\|\\(?:~~\\|->\\|\\$>\\|\\*>\\|\\+>\\|--\\|<[<=-]\\|=[<=>]\\||>\\)\\|[*$+~/<=>|-]\\)")
+;;                ;; (61 . ".\\(?:\\(?:/=\\|:=\\|<<\\|=[=>]\\|>>\\)\\|[<=>~]\\)")
+;;                (62 . ".\\(?:\\(?:=>\\|>[=>-]\\)\\|[=>-]\\)")
+;;                (63 . ".\\(?:\\(\\?\\?\\)\\|[:=?]\\)")
+;;                (91 . ".\\(?:]\\)")
+;;                (92 . ".\\(?:\\(?:\\\\\\\\\\)\\|\\\\\\)")
+;;                (94 . ".\\(?:=\\)")
+;;                (119 . ".\\(?:ww\\)")
+;;                (123 . ".\\(?:-\\)")
+;;                (124 . ".\\(?:\\(?:|[=|]\\)\\|[=>|]\\)")
+;;                (126 . ".\\(?:~>\\|~~\\|[>=@~-]\\)")
+;;                )
+;;              ))
+;;   (dolist (char-regexp alist)
+;;     (set-char-table-range composition-function-table (car char-regexp)
+;;                           `([,(cdr char-regexp) 0 font-shape-gstring]))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -199,8 +251,16 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; flycheck
-
+(require 'flycheck)
 (add-hook 'after-init-hook #'global-flycheck-mode)
+
+;; disable jshint since we prefer eslint checking
+(setq-default flycheck-disabled-checkers
+              (append flycheck-disabled-checkers
+                      '(javascript-jshint)))
+
+;; use eslint with web-mode for jsx files
+(flycheck-add-mode 'javascript-eslint 'web-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; fill-column-indictor
@@ -739,6 +799,13 @@
 (add-to-list 'auto-mode-alist '("\\.css?\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.jsx?\\'" . web-mode))
 
+(add-to-list 'auto-mode-alist '("*\\.js[x]?\\'" . web-mode))
+
+(setq web-mode-content-types-alist
+      '(("json" . "*\\.api\\'")
+        ("xml"  . "*\\.api\\'")
+        ("jsx"  . "*\\.js[x]?\\'")))
+
 (defun my-web-mode-hook ()
   "Hooks for Web mode."
   (setq-default indent-tabs-mode nil)
@@ -757,6 +824,20 @@
 
 (set-face-attribute 'web-mode-html-tag-face nil :foreground "#E55086")
 
+(add-hook 'web-mode-hook
+          (lambda ()
+            ;; short circuit js mode and just do everything in jsx-mode
+            (if (equal web-mode-content-type "javascript")
+                (web-mode-set-content-type "jsx")
+              (message "now set to: %s" web-mode-content-type))))
+
+(add-hook 'web-mode-hook
+          (lambda ()
+            (push '(">=" . ?≥) prettify-symbols-alist)
+            (push '("<=" . ?≤) prettify-symbols-alist)
+            ;; (push '("=>" . ?➾) prettify-symbols-alist)
+            ))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Emmet
 (require 'emmet-mode)
@@ -773,16 +854,47 @@
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (setq js2-mode-hook
       '(lambda () (progn
-                    (set-variable 'indent-tabs-mode nil)
-                    (set-variable 'tab-width 4)
-                    )))
+                (set-variable 'indent-tabs-mode nil)
+                (set-variable 'tab-width 2)
+                )))
+
+(add-hook 'js2-mode-hook
+          (lambda ()
+            (push '(">=" . ?≥) prettify-symbols-alist)
+            (push '("<=" . ?≤) prettify-symbols-alist)
+            ;; (push '("=>" . ?⇒) prettify-symbols-alist)
+            ))
+
+
+(setq js-indent-level 2)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; scss-mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(add-hook 'scss-mode 'scss-mode)
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/elpa/scss-mode-20150107.1400/"))
 (autoload 'scss-mode "scss-mode")
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
+
+(setq exec-path (cons (expand-file-name "~/.rbenv/shims") exec-path))
+(setq exec-path (cons (expand-file-name "~/.rbenv/shims/sass") exec-path))
+(setq exec-path (cons (expand-file-name "~/.rbenv/shims/sass-convert") exec-path))
+
+(setq scss-mode-hook
+      '(lambda () (progn
+                    (set-variable 'indent-tabs-mode nil)
+                    (set-variable 'tab-width 2)
+                    )))
+;;; less-css-mode
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(require 'less-css-mode)
+;; (add-to-list 'auto-mode-alist '("\\.less\\'" . less-css-mode))
+
+(setq less-css-mode-hook
+      '(lambda () (progn
+                    (set-variable 'tab-width 2)
+                    )))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; haml
@@ -809,6 +921,14 @@
   )
 
 (add-to-list 'auto-mode-alist '("\\.eex\\'" . my-eex-mode))
+
+(add-hook 'alchemist-mode-hook
+          (lambda ()
+            (push '(">=" . ?≥) prettify-symbols-alist)
+            (push '("<=" . ?≤) prettify-symbols-alist)
+            ;; (push '("|>" . ?▹) prettify-symbols-alist)
+            ;; (push '("->" . ?→) prettify-symbols-alist)
+            ))
 
 (add-hook 'alchemist-mode-hook
           (lambda ()
@@ -889,6 +1009,61 @@
 (add-hook 'haskell-mode-hook 'haskell-indentation-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; OCaml
+(load "/home/lafwind/.opam/4.04.0/share/emacs/site-lisp/tuareg-site-file")
+(load "/home/lafwind/.opam/4.02.3+buckle-master/share/emacs/site-lisp/tuareg-site-file")
+
+;; -- Tuareg mode -----------------------------------------
+;; Add Tuareg to your search path
+
+(require 'tuareg)
+(setq auto-mode-alist
+      (append '(("\\.ml[ily]?$" . tuareg-mode))
+              auto-mode-alist))
+
+(let ((opam-share (ignore-errors (car (process-lines "opam" "config" "var" "share")))))
+  (when (and opam-share (file-directory-p opam-share))
+    ;; Register Merlin
+    (add-to-list 'load-path (expand-file-name "emacs/site-lisp" opam-share))
+    (autoload 'merlin-mode "merlin" nil t nil)
+    ;; Automatically start it in OCaml buffers
+    (add-hook 'tuareg-mode-hook 'merlin-mode t)
+    (add-hook 'caml-mode-hook 'merlin-mode t)
+    ;; Use opam switch to lookup ocamlmerlin binary
+    (setq merlin-command 'opam)))
+
+;; Add the opam lisp dir to the emacs load path
+(add-to-list
+ 'load-path
+ (replace-regexp-in-string
+  "\n" "/share/emacs/site-lisp"
+  (shell-command-to-string "opam config var prefix")))
+
+;; Automatically load utop.el
+(autoload 'utop "utop" "Toplevel for OCaml" t)
+
+;; Use the opam installed utop
+(setq utop-command "opam config exec -- utop -emacs")
+
+;;----------------------------------------------------------------------------
+;; Reason setup
+;;----------------------------------------------------------------------------
+
+(setq opam (substring (shell-command-to-string "opam config var prefix 2> /dev/null") 0 -1))
+(add-to-list 'load-path (concat opam "/share/emacs/site-lisp"))
+(setq refmt-command (concat opam "/bin/refmt"))
+
+(require 'reason-mode)
+(require 'merlin)
+(setq merlin-ac-setup t)
+(add-hook 'reason-mode-hook (lambda ()
+                              (add-hook 'before-save-hook 'refmt-before-save)
+                              (merlin-mode)))
+
+(add-hook 'reason-mode-hook (lambda ()
+                              (add-hook 'before-save-hook 'refmt-before-save)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; sql-indent
 (eval-after-load "sql"
   '(load-library "sql-indent"))
@@ -956,8 +1131,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; indent guide
 
-(indent-guide-global-mode)
-(setq indent-guide-recursive t)
+;; (indent-guide-global-mode)
+;; (setq indent-guide-recursive t)
 
 ;;; dired mode
 
